@@ -64,19 +64,16 @@ export const lightTheme = createTheme({
         MuiButton: {
             defaultProps: {
                 variant: 'contained',
-                size: 'small',
+                size: 'medium',
                 disableElevation: true,
-                color: 'info'
             },
             styleOverrides: {
                 root: {
                     textTransform: 'none',
                     boxShadow: 'none',
-                    borderRadius: 10,
-                    ":hover": {
-                        backgroundColor: 'rgba(0,0,0,0.05)',
-                        transition: 'all 0.3s ease-in-out'
-                    }
+                    borderRadius: 15,
+                    width: '100%',
+                    padding: '.75rem 2rem'
                 }
             }
         },
@@ -90,6 +87,18 @@ export const lightTheme = createTheme({
                 root: {
                     boxShadow: '0px 5px 5px rgba(0,0,0,0.05)',
                     borderRadius: '10px',
+                }
+            }
+        },
+
+        MuiContainer:{
+            
+            styleOverrides:{
+                root:{
+                    maxWidth: '90%',
+                    '@media(min-width: 780px)' : {
+                        width: '80%'
+                    }
                 }
             }
         }

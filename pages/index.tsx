@@ -1,8 +1,10 @@
 import { NextPage } from 'next';
 
+import { Typography } from '@mui/material';
+
 const HomePage:NextPage = () => {
     return (
-        <div>index</div>
+        <Typography>index</Typography>
     )
 }
 
