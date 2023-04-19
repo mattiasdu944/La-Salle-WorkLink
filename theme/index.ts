@@ -20,10 +20,10 @@ export const lightTheme = createTheme({
     palette: {
         mode: 'light',
         primary: {
-            main: '#1E1E1E'
+            main: '#FD1339'
         },
         secondary: {
-            main: '#3A64D8'
+            main: '#504DFC'
         },
         info: {
             main: '#fff'
@@ -46,15 +46,16 @@ export const lightTheme = createTheme({
         MuiTypography: {
             styleOverrides: {
                 h1: {
+                    fontSize: 40,
+                    fontWeight: 700,
+                    
+                },
+                h2: {
                     fontSize: 30,
                     fontWeight: 700
                 },
-                h2: {
-                    fontSize: 20,
-                    fontWeight: 500
-                },
                 subtitle1: {
-                    fontSize: 18,
+                    fontSize: 20,
                     fontWeight: 600
                 }
             }
