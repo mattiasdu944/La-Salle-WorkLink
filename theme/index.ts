@@ -45,6 +45,9 @@ export const lightTheme = createTheme({
 
         MuiTypography: {
             styleOverrides: {
+                root:{
+                    lineHeight: 1.4
+                },
                 h1: {
                     fontSize: 40,
                     fontWeight: 700,
@@ -98,7 +101,7 @@ export const lightTheme = createTheme({
                 root:{
                     maxWidth: '90%',
                     '@media(min-width: 780px)' : {
-                        width: '80%'
+                        width: '90%'
                     }
                 }
             }
