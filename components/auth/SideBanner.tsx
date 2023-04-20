@@ -19,7 +19,7 @@ export const SideBanner: FC<Props> = ({ link, message, textButton }) => {
             background:' linear-gradient(153deg, rgba(80,77,252,1) 0%, rgba(253,19,57,1) 100%)',
         }}>
             <Container sx={{ padding: '2rem', height:'100%', display:'flex', justifyContent:'end', flexDirection:'column' }}>
-                <Typography sx={{ fontSize:'3rem', fontWeight:'700', color:'info.main', mb:'1rem' }}>
+                <Typography variant='h2' sx={{ color:'info.main', mb:'1rem' }}>
                     Manténgase actualizado en su red
                 </Typography>
 
@@ -31,7 +31,8 @@ export const SideBanner: FC<Props> = ({ link, message, textButton }) => {
                     display: 'flex',
                     gap: '1rem',
                     justifyContent: 'space-between',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    flexDirection: { xs:'column', md:'row' }
                 }}>
                     <Typography>{ message }</Typography>
                     <Link href={ link }>

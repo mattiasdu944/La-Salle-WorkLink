@@ -55,7 +55,10 @@ export const lightTheme = createTheme({
                 },
                 h2: {
                     fontSize: 30,
-                    fontWeight: 700
+                    fontWeight: 700,
+                    '@media(min-width: 780px)' : {
+                        fontSize: 36,
+                    }
                 },
                 subtitle1: {
                     fontSize: 20,
@@ -99,7 +102,7 @@ export const lightTheme = createTheme({
             
             styleOverrides:{
                 root:{
-                    maxWidth: '90%',
+                    width: '95%',
                     '@media(min-width: 780px)' : {
                         width: '90%'
                     }
