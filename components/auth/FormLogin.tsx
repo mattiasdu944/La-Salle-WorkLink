@@ -42,7 +42,9 @@ export const FormLogin:FC = () => {
                     />
                 </FormControl>
 
-                <Button type='submit' sx={{ mb:'1rem' }} variant="contained">Contained</Button>
+                <Button type='submit' sx={{ mb:'1rem' }} variant="contained">
+                    Iniciar sesion
+                </Button>
                 <Typography mb='1rem' textAlign='center'>o</Typography>
 
                 <Button type='submit' variant="outlined">

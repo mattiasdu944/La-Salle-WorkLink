@@ -1,7 +1,7 @@
 import Head from 'next/head'
 
 import { Box, Container, Grid } from '@mui/material'
-import { FormLogin } from '../../components/auth/FormLogin';
+import { FormLogin, SideBanner } from '@/components';
 
 const LoginPage = () => {
     return (
@@ -12,8 +12,19 @@ const LoginPage = () => {
 
             <Grid container component='main' sx={{  minHeight:'100vh' }}>
                 <Grid item xs={ 12 } md={ 6 }>
-                    <Container>
-                        imagen
+                    <Container sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        flexDirection: 'column',
+                        height: '100%',
+                        padding: '2rem 0'
+                    }}>
+                        <SideBanner 
+                            message={'¿No tienes una cuenta?'} 
+                            textButton={'Registrate'} 
+                            link={'/auth/register'}
+                        />
                     </Container>
                 </Grid>
 
