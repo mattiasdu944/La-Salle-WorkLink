@@ -10,7 +10,11 @@ const LoginPage = () => {
                 <title>WorkLink - Inicia Sesion</title>
             </Head>
 
-            <Grid container component='main' sx={{  minHeight:'100vh' }}>
+            <Grid container component='main' sx={{  
+                minHeight:'100vh', 
+                flexDirection:{ xs:'column-reverse', md:'row' },
+                padding: { xs: '2rem 0' } 
+            }}>
                 <Grid item xs={ 12 } md={ 6 }>
                     <Container sx={{
                         display: 'flex',
