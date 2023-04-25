@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt';
 interface SeedUser {
     name    : string;
     lastname: string;
@@ -18,7 +19,7 @@ export const initialData: SeedData = {
             lastname: 'Duarte Aparicio',
             username:' 104924121',
             email: 'duartemattias4@gmail.com',
-            password:'+Mduarte2023',
+            password: bcrypt.hashSync( '+Mduarte2023', 10),
             role: 'student'
         }
     ]
