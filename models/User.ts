@@ -10,7 +10,7 @@ const userSchema = new Schema({
     role    : { 
         type: String, 
         enum: {
-            values: ['company','student'],
+            values: ['company','student','admin'],
             message: '{VALUE} invalid',
             default: 'student',
             required: true
