@@ -3,12 +3,12 @@ import { useRouter } from 'next/router';
 import { useSession, signOut } from 'next-auth/react';
 
 // import Cookies from 'js-cookie';
-// import axios from 'axios';
+import axios from 'axios';
 
 import { AuthContext, authReducer } from './';
 
 
-// import { tesloApi } from '../../api';
+import { worklinkApi } from '../../api';
 import { IUser } from '../../interfaces';
 
 export interface AuthState {
@@ -77,30 +77,30 @@ export const AuthProvider:FC<any> = ({ children }) => {
     // }
 
 
-    // const registerUser = async( name: string, email: string, password: string ): Promise<{hasError: boolean; message?: string}> => {
-    //     try {
-    //         const { data } = await tesloApi.post('/user/register', { name, email, password });
-    //         const { token, user } = data;
-    //         Cookies.set('token', token );
-    //         dispatch({ type: '[Auth] - Login', payload: user });
-    //         return {
-    //             hasError: false
-    //         }
+    const registerUser = async(email: string, password: string, name: string, lastname: string, username: string): Promise<{hasError: boolean; message?: string}> => {
+        try {
+            const { data } = await worklinkApi.post('/user/register', { name, email, password, lastname, username });
+            const { user } = data;
+            
+            dispatch({ type: '[Auth] - Login', payload: user });
+            return {
+                hasError: false
+            }
 
-    //     } catch (error) {
-    //         if ( axios.isAxiosError(error) ) {
-    //             return {
-    //                 hasError: true,
-    //                 message: error.response?.data.message
-    //             }
-    //         }
+        } catch (error) {
+            if ( axios.isAxiosError(error) ) {
+                return {
+                    hasError: true,
+                    message: error.response?.data.message
+                }
+            }
 
-    //         return {
-    //             hasError: true,
-    //             message: 'No se pudo crear el usuario - intente de nuevo'
-    //         }
-    //     }
-    // }
+            return {
+                hasError: true,
+                message: 'No se pudo crear el usuario - intente de nuevo'
+            }
+        }
+    }
 
 
     const logout = () => {
@@ -115,7 +115,7 @@ export const AuthProvider:FC<any> = ({ children }) => {
 
             // Methods
             // loginUser,
-            // registerUser,
+            registerUser,
             logout,
         }}>
             { children }

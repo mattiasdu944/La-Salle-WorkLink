@@ -1,18 +1,23 @@
-import { FC, useState, FormEvent } from 'react'
+import { FC, useState, FormEvent, useEffect } from 'react';
+import { signIn } from 'next-auth/react';
 
-import { Box, Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography } from '@mui/material'
-import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx'
 import { ErrorMessage } from './';
+import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx'
+import { 
+    Box, Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography 
+} from '@mui/material'
+import { useRouter } from 'next/router';
 
 export const FormLogin:FC = () => {
 
     const [showPassword, setShowPassword] = useState(false);
     const [loginForm, setLoginForm] = useState({ email:'', password:'' });
     const [error, setError] = useState<string>()
+    const { query }  = useRouter();
 
-    const handleSubmit = ( e: FormEvent ) => {
+    const handleSubmit = async ( e: FormEvent ) => {
         e.preventDefault();
-
+        
         if( loginForm.email.trim() === '' ){
             setError('Ingrese un correo valido')
             return;
@@ -23,7 +28,16 @@ export const FormLogin:FC = () => {
         }
         setError( undefined );
 
+        await signIn('credentials', { email: loginForm.email, password: loginForm.password });
     }
+
+    useEffect(() => {
+        if( query.error ){
+            setError('Error en las credenciales')
+            return;
+        }
+    }, [])
+    
 
 
     return (

@@ -1,10 +1,11 @@
-import React from 'react'
 import Head from 'next/head'
+import { GetServerSideProps, NextPage } from 'next'
+import { getSession } from 'next-auth/react'
 
 import { Container, Grid } from '@mui/material'
 import { FormRegister, SideBanner } from '@/components'
 
-const RegisterPage = () => {
+const RegisterPage: NextPage = () => {
     return (
         <>
             <Head>
@@ -48,5 +49,28 @@ const RegisterPage = () => {
         </>
     )
 }
+
+
+export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
+    const session = await getSession({ req });
+
+    const { p = '/' } = query;
+
+    if( session ){
+        return {
+            redirect: {
+                destination: p.toString(),
+                permanent: false 
+            }
+        }
+    } 
+
+    return {
+        props: {
+            
+        }
+    }
+}
+
 
 export default RegisterPage

@@ -1,48 +1,67 @@
-import { FC, FormEvent, useState } from 'react'
+import { FC, FormEvent, useState, useContext } from 'react';
+import { AuthContext } from '@/context/auth';
+import { signIn } from 'next-auth/react';
 
-import { Box, Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography } from '@mui/material'
-import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx'
 import { ErrorMessage } from './';
+import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx'
+import { 
+    Box, Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography 
+} from '@mui/material'
 
 export const FormRegister: FC = () => {
-    const [showPassword, setShowPassword] = useState(false);
-    const [loginForm, setLoginForm] = useState({ name:'', lastname:'', username:'', email:'', password:'', passwordConfirmation:'' });
-    const [error, setError] = useState<string>()
+    const { registerUser,  } = useContext( AuthContext );
 
-    const handleSubmit = ( e: FormEvent ) => {
+    const [showPassword, setShowPassword] = useState(false);
+    const [registerForm, setLoginForm] = useState({ name:'', lastname:'', username:'', email:'', password:'', passwordConfirmation:'' });
+    const [error, setError] = useState<string>();
+
+
+
+    const handleSubmit = async ( e: FormEvent ) => {
+
+        const { email, lastname, name, password, passwordConfirmation, username } = registerForm;
         e.preventDefault();
 
-        if( loginForm.name.trim() == '' || loginForm.name.trim().length < 4){
+        if( name.trim() == '' || name.trim().length < 4){
             setError('Ingrese un nombre valido');
             return;
         }
 
-        if( loginForm.lastname.trim() === '' || loginForm.lastname.trim().length < 4){
+        if( lastname.trim() === '' || lastname.trim().length < 4){
             setError('Ingrese un apellido valido')
             return;
         }
 
-        if( loginForm.email.trim() === '' || loginForm.lastname.trim().length < 4){
+        if( email.trim() === '' || lastname.trim().length < 4){
             setError('Ingrese una direccion de correo valido')
             return;
         }
 
-        if( loginForm.username.trim().length < 4){
+        if( username.trim().length < 4){
             setError('Nombre de usuario muy corto')
             return;
         }
         
-        if( loginForm.password.length < 8 ){
+        if( password.length < 8 ){
             setError('La contraseña debe tener minimo 8 caracteres')
             return;
         }
 
-        if( loginForm.password.trim() !== loginForm.passwordConfirmation.trim() ){
+        if( password.trim() !== passwordConfirmation.trim() ){
             setError('Las contraseñas no coinciden')
             return;
         }
         setError( undefined );
 
+
+        const { hasError, message } = await registerUser( email, password, name, lastname, username );
+        if( hasError ){
+            setError( message )
+            return;
+        }
+
+
+        await signIn('credentials', { email, password } );
     }
 
 
@@ -50,7 +69,6 @@ export const FormRegister: FC = () => {
         <>
             <Typography variant='h1' textAlign='center'>Registrate</Typography>
             <Typography textAlign='center' mb='2rem'>Toma el siguiente paso y empieza en un nuevo mundo</Typography>
-
             <Box component='form' onSubmit={ handleSubmit } sx={{ width:'90%' }}>
                 { error && <ErrorMessage>{ error }</ErrorMessage> }
                 <TextField 
@@ -59,8 +77,8 @@ export const FormRegister: FC = () => {
                     name='name'
                     variant="outlined" 
                     sx={{ width:'100%', mb:'1rem' }}
-                    value={ loginForm.name }
-                    onChange={ (e) => setLoginForm({...loginForm, [e.target.name]:e.target.value }) }
+                    value={ registerForm.name }
+                    onChange={ (e) => setLoginForm({...registerForm, [e.target.name]:e.target.value }) }
                 />
                 <TextField 
                     type='text'
@@ -68,8 +86,8 @@ export const FormRegister: FC = () => {
                     name='lastname'
                     variant="outlined" 
                     sx={{ width:'100%', mb:'1rem' }}
-                    value={ loginForm.lastname }
-                    onChange={ (e) => setLoginForm({...loginForm, [e.target.name]:e.target.value }) }
+                    value={ registerForm.lastname }
+                    onChange={ (e) => setLoginForm({...registerForm, [e.target.name]:e.target.value }) }
                 />
                 <TextField 
                     type='text' 
@@ -77,8 +95,8 @@ export const FormRegister: FC = () => {
                     name='username'
                     variant="outlined" 
                     sx={{ width:'100%', mb:'1rem' }}
-                    value={ loginForm.username }
-                    onChange={ (e) => setLoginForm({...loginForm, [e.target.name]:e.target.value }) }
+                    value={ registerForm.username }
+                    onChange={ (e) => setLoginForm({...registerForm, [e.target.name]:e.target.value }) }
                 />
                 <TextField 
                     type='email'
@@ -86,8 +104,8 @@ export const FormRegister: FC = () => {
                     name='email'
                     variant="outlined" 
                     sx={{ width:'100%', mb:'1rem' }}
-                    value={ loginForm.email }
-                    onChange={ (e) => setLoginForm({...loginForm, [e.target.name]:e.target.value }) }
+                    value={ registerForm.email }
+                    onChange={ (e) => setLoginForm({...registerForm, [e.target.name]:e.target.value }) }
                 />
 
                 <FormControl sx={{ width: '100%', mb:'1rem' }} variant="outlined">
@@ -109,8 +127,8 @@ export const FormRegister: FC = () => {
                         }
                         label="Password"
                         name='password'
-                        value={ loginForm.password }
-                        onChange={ (e) => setLoginForm({...loginForm, [e.target.name]:e.target.value }) }
+                        value={ registerForm.password }
+                        onChange={ (e) => setLoginForm({...registerForm, [e.target.name]:e.target.value }) }
                     />
                 </FormControl>
 
@@ -122,8 +140,8 @@ export const FormRegister: FC = () => {
                         type={showPassword ? 'text' : 'password'}
                         label="Password"
                         name='passwordConfirmation'
-                        value={ loginForm.passwordConfirmation }
-                        onChange={ (e) => setLoginForm({...loginForm, [e.target.name]:e.target.value }) }
+                        value={ registerForm.passwordConfirmation }
+                        onChange={ (e) => setLoginForm({...registerForm, [e.target.name]:e.target.value }) }
                     />
                 </FormControl>
 

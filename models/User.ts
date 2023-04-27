@@ -2,11 +2,11 @@ import mongoose, { Model, Schema, model } from "mongoose";
 import { IUser } from "@/interfaces";
 
 const userSchema = new Schema({
+    email   : { type: String, required: true, unique: true },
+    password: { type: String, required: true },
     name    : { type: String, required: true },
     lastname: { type: String, required: true },
     username: { type: String, required: true, unique: true },
-    email   : { type: String, required: true, unique: true },
-    password: { type: String, required: true },
     role    : { 
         type: String, 
         enum: {

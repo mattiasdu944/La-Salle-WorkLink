@@ -1,9 +1,15 @@
 import Head from 'next/head'
+import { NextPage } from 'next';
+import { GetServerSideProps } from 'next'
 
-import { Box, Container, Grid } from '@mui/material'
 import { FormLogin, SideBanner } from '@/components';
+import { Container, Grid } from '@mui/material'
+import { getSession } from 'next-auth/react';
 
-const LoginPage = () => {
+const LoginPage: NextPage = () => {
+
+
+
     return (
         <>
             <Head>
@@ -47,5 +53,33 @@ const LoginPage = () => {
         </>
     )
 }
+
+
+
+
+export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
+    const session = await getSession({ req });
+
+    const { p = '/' } = query;
+
+    if( session ){
+        return {
+            redirect: {
+                destination: p.toString(),
+                permanent: false 
+            }
+        }
+    } 
+
+    console.log(session); 
+
+    return {
+        props: {
+            
+        }
+    }
+}
+
+
 
 export default LoginPage
