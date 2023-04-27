@@ -1,12 +1,13 @@
 import { FC, useState, FormEvent, useEffect } from 'react';
+import Link from 'next/link';
 import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 import { ErrorMessage } from './';
 import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx'
 import { 
     Box, Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography 
 } from '@mui/material'
-import { useRouter } from 'next/router';
 
 export const FormLogin:FC = () => {
 
@@ -42,12 +43,24 @@ export const FormLogin:FC = () => {
 
     return (
         <>
-            <Typography variant='h1' textAlign='center'>Inicia Sesion</Typography>
-            <Typography textAlign='center' mb='4rem'>Toma el siguiente paso y empieza en un nuevo mundo</Typography>
-
-            <Box component='form' onSubmit={ handleSubmit } sx={{ width:'100%' }}>
+            <Box 
+                component='form' 
+                onSubmit={ handleSubmit }
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    flexDirection: 'column',
+                    background:'#fff',
+                    maxWidth: '500px',
+                    boxShadow:'0px 10px 15px rgba(0,0,0,.05)',
+                    padding: { xs:'4rem 2rem', md:'5rem' },
+                    borderRadius: '.5rem'
+                }}
+            >
                 { error && <ErrorMessage>{ error }</ErrorMessage> }
-                
+                <Typography variant='h1' textAlign='center'>Inicia Sesion</Typography>
+                <Typography textAlign='center' mb='4rem'>Toma el siguiente paso y empieza en un nuevo mundo</Typography>
                 <TextField 
                     type='email'
                     name='email'
@@ -85,9 +98,15 @@ export const FormLogin:FC = () => {
                 </Button>
                 <Typography mb='1rem' textAlign='center'>o</Typography>
 
-                <Button type='submit' variant="outlined">
+                <Button type='submit' variant="outlined" sx={{mb:2}}>
                     Iniciar con Google
                 </Button>
+
+                <Link href='/auth/register'>
+                    <Typography>
+                        No tienes cuenta? Registrate.
+                    </Typography>
+                </Link>
             </Box>      
         </>
     )

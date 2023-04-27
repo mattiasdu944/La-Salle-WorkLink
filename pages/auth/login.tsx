@@ -3,53 +3,35 @@ import { NextPage } from 'next';
 import { GetServerSideProps } from 'next'
 
 import { FormLogin, SideBanner } from '@/components';
-import { Container, Grid } from '@mui/material'
+import { Box, Container, Grid, Typography } from '@mui/material'
 import { getSession } from 'next-auth/react';
 
 const LoginPage: NextPage = () => {
-
-
-
     return (
         <>
             <Head>
                 <title>WorkLink - Inicia Sesion</title>
             </Head>
 
-            <Grid container component='main' sx={{  
-                minHeight:'100vh', 
-                flexDirection:{ xs:'column-reverse', md:'row' },
-                padding: { xs: '2rem 0' } 
-            }}>
-                <Grid item xs={ 12 } md={ 6 }>
-                    <Container sx={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        flexDirection: 'column',
-                        height: '100%',
-                        padding: '2rem 0'
-                    }}>
-                        <SideBanner 
-                            message={'¿No tienes una cuenta?'} 
-                            textButton={'Registrate'} 
-                            link={'/auth/register'}
-                        />
-                    </Container>
-                </Grid>
+            <Box 
+                component='main' 
+                sx={{  
+                    minHeight:'100vh',
+                    display: 'flex',
+                    alignItems:'center',
+                    background:'#f9f6fc'
+                }}
+            >
 
-                <Grid item xs={ 12 } md={ 6 }>
-                    <Container sx={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        flexDirection: 'column',
-                        height: '100%',
-                    }}>
-                        <FormLogin/>
-                    </Container>
-                </Grid>
-            </Grid>
+                <Container sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    flexDirection: 'column',
+                }}>
+                    <FormLogin/>
+                </Container>
+            </Box>
         </>
     )
 }
@@ -71,7 +53,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }) => 
         }
     } 
 
-    console.log(session); 
 
     return {
         props: {

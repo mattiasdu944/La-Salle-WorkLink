@@ -7,6 +7,7 @@ import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx'
 import { 
     Box, Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography 
 } from '@mui/material'
+import Link from 'next/link';
 
 export const FormRegister: FC = () => {
     const { registerUser,  } = useContext( AuthContext );
@@ -67,9 +68,23 @@ export const FormRegister: FC = () => {
 
     return (
         <>
-            <Typography variant='h1' textAlign='center'>Registrate</Typography>
-            <Typography textAlign='center' mb='2rem'>Toma el siguiente paso y empieza en un nuevo mundo</Typography>
-            <Box component='form' onSubmit={ handleSubmit } sx={{ width:'90%' }}>
+            <Box 
+                component='form' 
+                onSubmit={ handleSubmit }
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    flexDirection: 'column',
+                    background:'#fff',
+                    maxWidth: '500px',
+                    boxShadow:'0px 10px 15px rgba(0,0,0,.05)',
+                    padding: { xs:'2rem', md:'3rem 5rem' },
+                    borderRadius: '.5rem'
+                }}
+            >
+                <Typography variant='h1' textAlign='center'>Registrate</Typography>
+                <Typography textAlign='center' mb='2rem'>Toma el siguiente paso y empieza en un nuevo mundo</Typography>
                 { error && <ErrorMessage>{ error }</ErrorMessage> }
                 <TextField 
                     type='text'
@@ -150,9 +165,14 @@ export const FormRegister: FC = () => {
                 </Button>
                 <Typography mb='1rem' textAlign='center'>o</Typography>
 
-                <Button type='submit' variant="outlined">
+                <Button type='submit' variant="outlined" sx={{ mb:3 }}>
                     Registrarse con Google
                 </Button>
+                <Link href='/auth/login'>
+                    <Typography>
+                        Ya tienes cuenta? Inicia Sesion.
+                    </Typography>
+                </Link>
             </Box>      
         </>
     )
