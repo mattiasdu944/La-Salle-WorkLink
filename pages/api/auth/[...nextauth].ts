@@ -5,9 +5,6 @@ import Credentials from "next-auth/providers/credentials";
 
 export default NextAuth({
     providers: [
-
-        // ...add more providers here
-
         Credentials({
             name: 'Custom Login',
             credentials: {
@@ -25,7 +22,6 @@ export default NextAuth({
 
     secret: process.env.NEXT_PUBLIC_SECRET,
 
-
     pages:{
         signIn: '/auth/login',
         newUser: '/auth/register'
@@ -37,6 +33,7 @@ export default NextAuth({
         strategy: 'jwt',
         updateAge: 86400, // cada día
     },
+    
     callbacks: {
         async jwt({ token, account, user }) {
 
@@ -63,7 +60,8 @@ export default NextAuth({
         async session({ session, token, user }) {
             // session.accessToken = token.accessToken;
             session.user = token.user as any;   
-            return session;
+            // console.log({...session, accessToken: token.accessToken});
+            return {...session, accessToken: token.accessToken };
         }
     }
 });
