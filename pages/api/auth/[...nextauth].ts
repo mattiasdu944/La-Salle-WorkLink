@@ -20,11 +20,10 @@ export default NextAuth({
 
     ],
 
-    secret: process.env.NEXT_PUBLIC_SECRET,
-
+    
     pages:{
         signIn: '/auth/login',
-        newUser: '/auth/register'
+        // newUser: '/auth/register'
     },
 
     // Callbacks
@@ -41,16 +40,16 @@ export default NextAuth({
                 token.accessToken = account.access_token;
 
                 switch (account.type) {
-                    case 'oauth':
-                        token.user = await dbUsers.oAuthToDbUser(user?.email || '', user?.name || '');
-                        break;
+                    // case 'oauth':
+                    //     token.user = await dbUsers.oAuthToDbUser(user?.email || '', user?.name || '');
+                    //     break;
 
                     case 'credentials':
                         token.user = user;
                         break;
 
-                    default:
-                        break;
+                    // default:
+                    //     break;
                 }
             }
 
@@ -63,5 +62,6 @@ export default NextAuth({
             // console.log({...session, accessToken: token.accessToken});
             return {...session, accessToken: token.accessToken };
         }
-    }
+    },
+    secret: process.env.NEXT_PUBLIC_SECRET,
 });
