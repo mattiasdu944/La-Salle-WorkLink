@@ -23,7 +23,7 @@ export default NextAuth({
     
     pages:{
         signIn: '/auth/login',
-        // newUser: '/auth/register'
+        newUser: '/auth/register'
     },
 
     // Callbacks
@@ -33,35 +33,35 @@ export default NextAuth({
         updateAge: 86400, // cada día
     },
     
-    // callbacks: {
-    //     async jwt({ token, account, user }) {
+    callbacks: {
+        async jwt({ token, account, user }) {
 
-    //         if (account) {
-    //             token.accessToken = account.access_token;
+            if (account) {
+                token.accessToken = account.access_token;
 
-    //             switch (account.type) {
-    //                 // case 'oauth':
-    //                 //     token.user = await dbUsers.oAuthToDbUser(user?.email || '', user?.name || '');
-    //                 //     break;
+                switch (account.type) {
+                    case 'oauth':
+                        token.user = await dbUsers.oAuthToDbUser(user?.email || '', user?.name || '');
+                        break;
 
-    //                 case 'credentials':
-    //                     token.user = user;
-    //                     break;
+                    case 'credentials':
+                        token.user = user;
+                        break;
 
-    //                 // default:
-    //                 //     break;
-    //             }
-    //         }
+                    default:
+                        break;
+                }
+            }
 
-    //         return token;
-    //     },
+            return token;
+        },
 
-    //     async session({ session, token, user }) {
-    //         // session.accessToken = token.accessToken;
-    //         session.user = token.user as any;   
-    //         // console.log({...session, accessToken: token.accessToken});
-    //         return {...session, accessToken: token.accessToken };
-    //     }
-    // },
+        async session({ session, token, user }) {
+            // session.accessToken = token.accessToken;
+            session.user = token.user as any;   
+            // console.log({...session, accessToken: token.accessToken});
+            return {...session, accessToken: token.accessToken };
+        }
+    },
     secret: process.env.NEXT_PUBLIC_SECRET,
 });
