@@ -8,7 +8,7 @@ import axios from 'axios';
 import { AuthContext, authReducer } from './';
 
 
-import { worklinkApi } from '../../api';
+import { worklinkApi } from '../../client';
 import { IUser } from '../../interfaces';
 
 export interface AuthState {
