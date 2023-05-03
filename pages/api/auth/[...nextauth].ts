@@ -5,9 +5,6 @@ import Credentials from "next-auth/providers/credentials";
 
 export default NextAuth({
     providers: [
-
-        // ...add more providers here
-
         Credentials({
             name: 'Custom Login',
             credentials: {
@@ -59,9 +56,7 @@ export default NextAuth({
             return token;
         },
 
-        async session({ session, token, user }) {
-
-            // session.accessToken = token.accessToken as any;
+        async session({ session, token }) {
             session.user = token.user as any;
 
             return {...session, accessToken: token.accessToken};
