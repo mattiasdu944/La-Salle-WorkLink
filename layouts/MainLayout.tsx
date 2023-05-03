@@ -25,7 +25,12 @@ export const MainLayout: FC<Props> = ({ children, description, title }) => {
 
             <SideMenu isMenuOpen={isMenuOpen} setIsMenuOpen={ setIsMenuOpen }/>
             
-            <main>
+            <main
+                style={{
+                    padding:'5rem',
+                    minHeight:'100vh',
+                }}
+            >
                 { children }
             </main>
         
