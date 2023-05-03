@@ -34,15 +34,13 @@ const registerUser = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
     
     const { email = '', password = '', name = '', lastname= '', username= '' } = req.body as { email: string, password: string, name: string, lastname: string, username: string };
 
-    console.log(req.body);
-
-    if ( password.length < 6 ) {
+    if ( password.trim().length < 6 ) {
         return res.status(400).json({
             message: 'La contraseña debe de ser de 6 caracteres'
         });
     }
 
-    if ( name.length < 2 ) {
+    if ( name.trim().length < 2 ) {
         return res.status(400).json({
             message: 'El nombre debe de ser de 2 caracteres'
         });
@@ -73,11 +71,11 @@ const registerUser = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
     }
 
     const newUser = new User({
-        name,
-        password: bcrypt.hashSync( password, 10 ),
-        email: email.toLocaleLowerCase(),
-        lastname: lastname.toLocaleLowerCase(),
-        username: username.toLocaleLowerCase(),
+        name: name.trim(),
+        password: bcrypt.hashSync( password.trim(), 10 ),
+        email: email.toLocaleLowerCase().trim(),
+        lastname: lastname.toLocaleLowerCase().trim(),
+        username: username.toLocaleLowerCase().trim(),
         role: 'student',
     });
 

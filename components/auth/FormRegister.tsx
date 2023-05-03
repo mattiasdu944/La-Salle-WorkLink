@@ -10,7 +10,7 @@ import {
 import Link from 'next/link';
 
 export const FormRegister: FC = () => {
-    const { registerUser,  } = useContext( AuthContext );
+    const { registerUser } = useContext( AuthContext );
 
     const [showPassword, setShowPassword] = useState(false);
     const [registerForm, setLoginForm] = useState({ name:'', lastname:'', username:'', email:'', password:'', passwordConfirmation:'' });
