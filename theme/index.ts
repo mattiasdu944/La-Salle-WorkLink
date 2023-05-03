@@ -33,12 +33,15 @@ export const lightTheme = createTheme({
         MuiAppBar: {
             defaultProps: {
                 elevation: 0,
-                position: 'fixed',
+                // position: 'fixed',
             },
             styleOverrides: {
                 root: {
+                    color:'#000',
                     backgroundColor: 'white',
-                    height: 60
+                    boxShadow: '0px 0px 5px rgba(0,0,0,0.3)',
+
+                    // height: 60
                 },
             }
         },
@@ -79,7 +82,6 @@ export const lightTheme = createTheme({
                     textTransform: 'none',
                     boxShadow: 'none',
                     borderRadius: 15,
-                    width: '100%',
                     padding: '.75rem 2rem'
                 }
             }

@@ -4,6 +4,7 @@ import { Typography } from '@mui/material';
 import { AuthContext } from '../context/auth/AuthContext';
 import { useContext } from 'react';
 import { useSession } from 'next-auth/react';
+import { MainLayout } from '@/layouts';
 
 const HomePage:NextPage = () => {
 
@@ -11,7 +12,13 @@ const HomePage:NextPage = () => {
     const  { user, isLoggedIn } = authContext;
     console.log({user, isLoggedIn});
     return (
-        <Typography>index</Typography>
+        <MainLayout 
+            title={'Worklink | Inicio'} 
+            description={'Worklink - Conoce todas las oportunidades laborales que puedes tener solo con la Universidad de La Salle Bolivia'}
+        >
+            <Typography>index</Typography>
+
+        </MainLayout>
     )
 }
 
