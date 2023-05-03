@@ -1,11 +1,5 @@
 import mongoose from 'mongoose';
 
-/**
- * 0 = disconnected
- * 1 = connected
- * 2 = connecting
- * 3 = disconnecting
- */
 const mongoConnection = {
     isConnected: 0
 }
@@ -28,9 +22,9 @@ export const connect = async() => {
         await mongoose.disconnect();
     }
 
-    await mongoose.connect( process.env.MONGO_URL || '');
+    await mongoose.connect( process.env.MONGO_URI || '');
     mongoConnection.isConnected = 1;
-    console.log('Conectado a MongoDB:', process.env.MONGO_URL );
+    console.log('Conectado a MongoDB:', process.env.MONGO_URI );
 }
 
 export const disconnect = async() => {
