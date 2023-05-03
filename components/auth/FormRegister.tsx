@@ -160,14 +160,14 @@ export const FormRegister: FC = () => {
                     />
                 </FormControl>
 
-                <Button type='submit' sx={{ mb:'1rem' }} variant="contained">
+                <Button type='submit' sx={{ mb:'1rem', width:'100%' }} variant="contained">
                     Crear cuenta
                 </Button>
-                <Typography mb='1rem' textAlign='center'>o</Typography>
+                {/* <Typography mb='1rem' textAlign='center'>o</Typography>
 
                 <Button type='submit' variant="outlined" sx={{ mb:3 }}>
                     Registrarse con Google
-                </Button>
+                </Button> */}
                 <Link href='/auth/login'>
                     <Typography>
                         Ya tienes cuenta? Inicia Sesion.

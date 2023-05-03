@@ -93,14 +93,14 @@ export const FormLogin:FC = () => {
                     />
                 </FormControl>
 
-                <Button type='submit' sx={{ mb:'1rem' }} variant="contained">
+                <Button type='submit' sx={{ mb:'1rem', width:'100%' }} variant="contained">
                     Iniciar sesion
                 </Button>
-                <Typography mb='1rem' textAlign='center'>o</Typography>
+                {/* <Typography mb='1rem' textAlign='center'>o</Typography>
 
                 <Button type='submit' variant="outlined" sx={{mb:2}}>
                     Iniciar con Google
-                </Button>
+                </Button> */}
 
                 <Link href='/auth/register'>
                     <Typography>
