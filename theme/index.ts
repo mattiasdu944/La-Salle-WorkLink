@@ -27,6 +27,9 @@ export const lightTheme = createTheme({
         },
         info: {
             main: '#fff'
+        },
+        text:{
+            primary:'#788'
         }
     },
     components: {
@@ -63,9 +66,19 @@ export const lightTheme = createTheme({
                         fontSize: 36,
                     }
                 },
+
+                h3: {
+                    fontSize: 25,
+                    fontWeight: 700,
+                    marginBottom:8,
+                    '@media(min-width: 780px)' : {
+                        fontSize: 30,
+                    }
+                },
                 subtitle1: {
                     fontSize: 20,
-                    fontWeight: 600
+                    fontWeight: 600,
+                    marginBottom:5
                 }
             }
         },

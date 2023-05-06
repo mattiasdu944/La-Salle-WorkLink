@@ -33,8 +33,13 @@ export const FormRegister: FC = () => {
             return;
         }
 
-        if( email.trim() === '' || lastname.trim().length < 4){
+        if( email.trim() === '' || email.trim().length < 4 ){
             setError('Ingrese una direccion de correo valido')
+            return;
+        }
+
+        if( !email.includes('ulasalle') ){
+            setError('Solo se permiten usuarios de La Salle')
             return;
         }
 

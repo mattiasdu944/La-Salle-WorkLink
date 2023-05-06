@@ -1,4 +1,5 @@
 export * from './AppBarMenu'
+export * from './RedSocialButtonOutlined'
 export * from './CustomAvatarButton'
 export * from './FormSearchBar'
 export * from './SideMenu'

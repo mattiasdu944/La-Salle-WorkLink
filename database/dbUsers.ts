@@ -1,13 +1,12 @@
 import { db } from "."
 import bcrypt from "bcrypt";
 import User from "@/models/User";
+import { IUser } from "@/interfaces";
 
 export const checkUserEmailPassword =async (email:string, password: string) => {
     await db.connect();
     const user = await User.findOne({ email });
     await db.disconnect();
-
-    console.log(user);
 
     if( !user ){
         return null;
@@ -45,4 +44,12 @@ export const oAuthToDbUser =async (oAuthEmail: string, oAuthName: string ) => {
     const { _id, name, email, role } = newUser;
 
     return { _id, name, email, role };
+}
+
+
+export const getUserData =async ( username: string ): Promise<any | null> => {
+    await db.connect();
+    const user = await User.findOne<any>({ username }).select('-_id -password -createdAt -updatedAt -__v');
+
+    return JSON.parse( JSON.stringify( user ) );;
 }

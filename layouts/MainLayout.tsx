@@ -2,6 +2,7 @@ import { FC, useState } from 'react'
 import Head from 'next/head'
 
 import { AppBarMenu, SideMenu } from '@/components';
+import { Box, Container } from '@mui/material';
 
 
 interface Props{
@@ -25,14 +26,16 @@ export const MainLayout: FC<Props> = ({ children, description, title }) => {
 
             <SideMenu isMenuOpen={isMenuOpen} setIsMenuOpen={ setIsMenuOpen }/>
             
-            <main
-                style={{
-                    padding:'5rem',
+            <Box
+                sx={{
+                    padding:'5rem 0',
                     minHeight:'100vh',
                 }}
             >
-                { children }
-            </main>
+                <Container>
+                    { children }
+                </Container>
+            </Box>
         
         </>
     )
