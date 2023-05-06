@@ -1,52 +1,52 @@
 import { dbUsers } from '@/database'
-import { IUser } from '@/interfaces'
+import { IProfile } from '@/interfaces'
 import { GetServerSideProps, NextPage } from 'next'
 
 import { MainLayout } from '@/layouts'
-import { Box, Grid, Typography } from '@mui/material'
+import { Grid } from '@mui/material'
 import { AboutCard, BannerProfile, CertificatesCard, ExperienceCard } from '@/components';
 
 
 interface Props{
-    user: IUser;
+    profile: IProfile;
 }
 
-const UserProfile: NextPage<Props> = ({ user }) => {
-    
-    return (
-        <MainLayout 
-            title={`Worklink | @${ user.username }`} 
-            description={'Worklink - Conoce todas las oportunidades laborales que puedes tener solo con la Universidad de La Salle Bolivia'}
-        >
-            <BannerProfile/>
-            <Box textAlign='center' mb='5rem'>
-                <Typography variant='h1'>Mattias Alexandre Duarte Aparicio</Typography>
-                <Typography >maduarte@est.ulasalle.edu.bo</Typography>
-                <Typography color='text.primary'>5to semestre - Ingenieria de sistemas</Typography>
-            </Box>
-
-            <AboutCard/>
+const UserProfile: NextPage<Props> = ({ profile }) => (
+    <MainLayout
+        title={`Worklink | @${profile?.username}`}
+        description={'Worklink - Conoce todas las oportunidades laborales que puedes tener solo con la Universidad de La Salle Bolivia'}
+    >
+        <BannerProfile 
+            profile={profile}
+        />
 
 
-            <Grid container>
-                <CertificatesCard/>
-                <ExperienceCard/>
-            </Grid>
+        <AboutCard 
+            description={ profile.description } 
+            socialNetworks={ profile.socialNetworks }
+        />
 
 
-        </MainLayout>
-    
-    )
-}
+        <Grid container>
+            <CertificatesCard />
+            <ExperienceCard />
+        </Grid>
+
+
+    </MainLayout>
+
+)
 
 
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-    const user = await  dbUsers.getUserData('mattias');
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 
+    const { username } = query as { username: string }
+
+    const profile = await  dbUsers.getUserProfile(username);
     return {
         props: {
-            user
+            profile
         }
     }
 }

@@ -1,4 +1,6 @@
+
 export interface IUserProfile {
+    user            : string;
     description     : string;
     phone           : string;
     birthday        : string;
@@ -10,20 +12,20 @@ export interface IUserProfile {
     socialNetworks  : IUserProfileSocialNetworks[],
 }
 
-interface IUserProfileCertificates {
+export interface IUserProfileCertificates {
     name        : string;
     dateOfIssue : string;
     company     : string;
 }
 
-interface IUserProfileExperience {
+export interface IUserProfileExperience {
     position    : string;
     company     : string;
     startDate   : string;
     endingtDate : string;
 }
 
-interface IUserProfileSocialNetworks {
+export interface IUserProfileSocialNetworks {
     name        : string;
     url         : string;
 }

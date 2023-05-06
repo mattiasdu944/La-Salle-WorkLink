@@ -79,6 +79,11 @@ export const lightTheme = createTheme({
                     fontSize: 20,
                     fontWeight: 600,
                     marginBottom:5
+                },
+                subtitle2: {
+                    fontSize: 18,
+                    fontWeight: 600,
+                    marginBottom:5
                 }
             }
         },

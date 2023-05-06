@@ -21,7 +21,7 @@ export const CustomAvatarButton: FC = () => {
     return (
         <Box sx={{ flexGrow: 0 }}>
             <IconButton onClick={ handleClick }>
-                <Avatar alt="Remy Sharp" src="/static/images/user_icon.png" />
+                <Avatar alt="Remy Sharp" src={ user?.image ? user.image : '' } />
             </IconButton>
             <Menu
                 id="basic-menu"
@@ -33,11 +33,11 @@ export const CustomAvatarButton: FC = () => {
                 'aria-labelledby': 'basic-button',
                 }}
             >
-                <MenuItem onClick={handleClose}>
-                    <Link href={`/profile/${ user?.username.trim() }`}>
-                        <Typography textAlign="center">Perfil</Typography>
-                    </Link>
-                </MenuItem>
+                <Link href={`/profile/${ user?.username.trim() }`}>
+                    <MenuItem onClick={handleClose}>
+                            <Typography textAlign="center">Perfil</Typography>
+                    </MenuItem>
+                </Link>
                 <MenuItem onClick={() => logout()}>
                     <Typography textAlign="center">Cerrar Sesion</Typography>
                 </MenuItem>

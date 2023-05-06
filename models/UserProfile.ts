@@ -1,18 +1,21 @@
 import mongoose, { Model, Schema, model } from "mongoose";
 import { IUserProfile } from "@/interfaces";
 
+
 const userProfileSchema = new Schema({
-    description     : { type: String, trim:true, },
-    phone           : { type: String, trim:true, },
-    birthday        : { type: String, trim:true, required: true },
-    years           : { type: String, trim:true, required: true },
-    career          : { type: String, trim:true, required: true },
-    semester        : { type: String, trim:true, required: true, enum: { values: ['1','2','3','4','5','6','7','8', '9', '10'] }, message: '{VALUE} invalid', },
+    user            : { type : Schema.Types.ObjectId , ref: 'User' },
+    description     : { type: String, trim:true, default:'' },
+    phone           : { type: String, trim:true, default:'' },
+    birthday        : { type: String, trim:true, default:'' },
+    years           : { type: Number, trim:true, default:'' },
+    career          : { type: String, trim:true, default:'' },
+    semester        : { type: String, trim:true, default:'1', enum: { values: ['1','2','3','4','5','6','7','8', '9', '10'] }, message: '{VALUE} invalid', },
     certificates    : [{ 
         type: { 
             name: String,
             dateOfIssue: String,
             company: String,
+            hours: Number,
         } 
     }],
     experience: [{ 

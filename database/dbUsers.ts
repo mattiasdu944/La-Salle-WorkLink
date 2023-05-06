@@ -2,6 +2,7 @@ import { db } from "."
 import bcrypt from "bcrypt";
 import User from "@/models/User";
 import { IUser } from "@/interfaces";
+import { UserProfile } from "@/models";
 
 export const checkUserEmailPassword =async (email:string, password: string) => {
     await db.connect();
@@ -16,12 +17,13 @@ export const checkUserEmailPassword =async (email:string, password: string) => {
         return null
     }
 
-    const { role, name, _id, username } = user;
+    const { role, name, _id, username, image } = user;
     return {
         _id,
         email: email.toLocaleLowerCase(),
         role,
         name,
+        image,
         username
     };
 }
@@ -47,9 +49,21 @@ export const oAuthToDbUser =async (oAuthEmail: string, oAuthName: string ) => {
 }
 
 
-export const getUserData =async ( username: string ): Promise<any | null> => {
+export const getUserProfile =async ( username: string ): Promise<any | null> => {
     await db.connect();
-    const user = await User.findOne<any>({ username }).select('-_id -password -createdAt -updatedAt -__v');
+    const user = await User.findOne<IUser>({ username });
+    const profile = await UserProfile.findOne({ user:user!._id }).select('-_id -user -createdAt -updatedAt -__v').lean();
+    await db.disconnect();
 
-    return JSON.parse( JSON.stringify( user ) );;
+    const { email, name, lastname, image, role } = user!;
+
+    return {
+        email, 
+        name, 
+        lastname, 
+        image, 
+        role,
+        username,
+        ...profile 
+    }
 }

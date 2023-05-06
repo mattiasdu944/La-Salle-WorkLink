@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { db } from '@/database';
-import { User } from '@/models';
+import { User, UserProfile } from '@/models';
 import bcrypt from 'bcrypt';
 
 
@@ -72,15 +72,22 @@ const registerUser = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
 
     const newUser = new User({
         name: name.trim(),
+        lastname: lastname.trim(),
         password: bcrypt.hashSync( password.trim(), 10 ),
         email: email.toLocaleLowerCase().trim(),
-        lastname: lastname.toLocaleLowerCase().trim(),
         username: username.toLocaleLowerCase().trim(),
         role: 'student',
     });
 
+    console.log({newUser});
+
+    const newUserProfile = new UserProfile({
+        user: newUser._id
+    })
+
     try {
         await newUser.save({ validateBeforeSave: true });
+        await newUserProfile.save();
 
     } catch (error) {
         console.log(error);
