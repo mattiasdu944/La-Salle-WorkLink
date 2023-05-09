@@ -16,6 +16,7 @@ export interface IUserProfileCertificates {
     name        : string;
     dateOfIssue : string;
     company     : string;
+    hours       : number;
 }
 
 export interface IUserProfileExperience {

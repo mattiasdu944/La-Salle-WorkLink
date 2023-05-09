@@ -5,6 +5,7 @@ import { FaWhatsapp } from "react-icons/fa";
 import { Box, Typography } from '@mui/material'
 import { GrFacebookOption, GrLinkedinOption, GrInstagram  } from "react-icons/gr";
 import { IUserProfileSocialNetworks } from '../../interfaces/userProfile';
+import Link from 'next/link';
 
 
 interface Props{
@@ -22,32 +23,33 @@ export const AboutCard: FC<Props> = ({ description, socialNetworks }) => {
             }}
         >
 
-            <Typography variant='h3'>Acerca de</Typography>
-            <Typography color='text.primary' mb={ 3 }>
+            <Typography textAlign='center' variant='h3'>Acerca de</Typography>
+            <Typography textAlign='center' color='text.primary'>
                 { description.length > 1 ? description : 'Aun no se agrego una descripcion' }
             </Typography>
-            <Box>
-                <Typography variant='subtitle1'>Redes Sociales</Typography>
-                <Box display='flex' gap='1rem'>
+            {
+                socialNetworks.length == 0
+                ?(
+                    <></>
+                )
+                :(
+                    <Box mt={ 3 }>
+                        <Typography textAlign='center' variant='subtitle1'>Redes Sociales</Typography>
+                        <Box display='flex' gap='1rem' justifyContent='center'>
+                            {
+                                socialNetworks.map((network, index) => (
+                                    <Link href={ network.url } target='_blank' key={ index } style={{ display:'block' }}>
+                                        <Typography sx={{ color:'text.primary', ':hover':{color:'primary.main', transition:'all .3s'} }}>
+                                            { network.name }
+                                        </Typography>
+                                    </Link>
+                                ))
+                            }
+                        </Box>
+                    </Box>
+                )
+            }
 
-                    
-                    <RedSocialButtonOutlined>
-                        <GrFacebookOption style={{ padding:0 }}/>
-                    </RedSocialButtonOutlined>
-
-                    <RedSocialButtonOutlined>
-                        <GrLinkedinOption/>
-                    </RedSocialButtonOutlined>
-                    
-                    <RedSocialButtonOutlined>
-                        <FaWhatsapp/>
-                    </RedSocialButtonOutlined>
-
-                    <RedSocialButtonOutlined>
-                        <GrInstagram/>
-                    </RedSocialButtonOutlined>
-                </Box>
-            </Box>
                 
         </Box>
     )

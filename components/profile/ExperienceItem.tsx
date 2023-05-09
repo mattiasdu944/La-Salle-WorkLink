@@ -4,19 +4,19 @@ import { Box, Divider, Typography } from '@mui/material'
 import { BiAward } from 'react-icons/bi'
 
 interface Props{
-    name        : string,
-    dateOfIssue : string,
-    company     : string,
-    hours       : number,
+    company         : string,
+    endingtDate     : string,
+    position        : string,
+    startDate       : string,
 }
 
-export const CertificateItem: FC<Props> = ({ company, dateOfIssue, hours, name }) => {
+export const ExperienceItem: FC<Props> = ({ company, endingtDate, position, startDate }) => {
     return (
         <>
             <Divider sx={{ my: 3 }} />
         
             <Box>
-                <Typography variant='subtitle2' >{ name }</Typography>
+                <Typography variant='subtitle2' >{ position }</Typography>
                 <Box
                     sx={{
                         display:'flex',
@@ -27,7 +27,7 @@ export const CertificateItem: FC<Props> = ({ company, dateOfIssue, hours, name }
                     <Box sx={{ color:'secondary.main', fontSize:'1.75rem' }}>
                         <BiAward/>
                     </Box>
-                    <Typography color='text.primary'>{ company } º { dateOfIssue } º { hours } Horas</Typography>
+                    <Typography color='text.primary'>{ company } º { startDate } º { endingtDate } Horas</Typography>
                 </Box>
 
             </Box>

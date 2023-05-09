@@ -5,6 +5,7 @@ export interface IProfile{
     name        : string,
     lastname    : string,
     image       : string,
+    banner      : string;
     role        : string,
     username    : string,
     description : string,

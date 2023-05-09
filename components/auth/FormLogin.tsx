@@ -6,30 +6,34 @@ import { useRouter } from 'next/router';
 import { ErrorMessage } from './';
 import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx'
 import { 
-    Box, Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography 
+    Box, Button, CircularProgress, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography 
 } from '@mui/material'
 
 export const FormLogin:FC = () => {
 
-    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(true);
     const [loginForm, setLoginForm] = useState({ email:'', password:'' });
+    const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState<string>()
     const { query }  = useRouter();
 
     const handleSubmit = async ( e: FormEvent ) => {
         e.preventDefault();
+        setIsLoading(true);
         
         if( loginForm.email.trim() === '' ){
             setError('Ingrese un correo valido')
+            setIsLoading(false);
             return;
         }
         if( loginForm.password.length < 8 ){
             setError('La contraseña debe tener minimo 8 caracteres')
+            setIsLoading(false);
             return;
         }
         setError( undefined );
-
         await signIn('credentials', { email: loginForm.email, password: loginForm.password });
+        setIsLoading(false);
     }
 
     useEffect(() => {
@@ -94,13 +98,18 @@ export const FormLogin:FC = () => {
                 </FormControl>
 
                 <Button type='submit' sx={{ mb:'1rem', width:'100%' }} variant="contained">
-                    Iniciar sesion
+                {
+                    isLoading
+                    ?(
+                        <CircularProgress sx={{ color:'#fff' }} size={20} thickness={2}/>
+                    )
+                    :(
+                        <Typography>
+                            Iniciar Sesion
+                        </Typography>
+                    )
+                }
                 </Button>
-                {/* <Typography mb='1rem' textAlign='center'>o</Typography>
-
-                <Button type='submit' variant="outlined" sx={{mb:2}}>
-                    Iniciar con Google
-                </Button> */}
 
                 <Link href='/auth/register'>
                     <Typography>

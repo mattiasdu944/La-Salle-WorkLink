@@ -1,18 +1,23 @@
 import { FC } from 'react'
 import { IProfile } from '@/interfaces'
+import { useRouter } from 'next/router'
 
-import { Avatar, Box, Typography } from '@mui/material'
+import { Avatar, Box, Button, Typography } from '@mui/material'
+import { AiOutlineEdit } from 'react-icons/ai'
 
 interface Props{
     profile: IProfile
 }
 
 export const BannerProfile: FC<Props> = ({ profile }) => {
+
+    const {query}  = useRouter();
+
     return (
         <>
             <Box
                 sx={{ 
-                    backgroundImage:'url(https://images.pexels.com/photos/3184398/pexels-photo-3184398.jpeg)',
+                    backgroundImage:`url(${ profile.banner })`,
                     backgroundPosition:'center center',
                     backgroundSize:'cover',
                     padding:'3rem',
@@ -38,7 +43,7 @@ export const BannerProfile: FC<Props> = ({ profile }) => {
                 />
             </Box>
 
-            <Box textAlign='center' mb='5rem'>
+            <Box textAlign='center'>
                 <Typography variant='h1'>{`${ profile.name } ${ profile.lastname }`}</Typography>
                 <Typography >{ profile.email }</Typography>
                 <Typography color='text.primary'>
@@ -52,8 +57,29 @@ export const BannerProfile: FC<Props> = ({ profile }) => {
                             ''
                         )
                     }
-                     
                 </Typography>
+            </Box>
+
+            <Box mb={ '3rem' } mt={'1rem'} textAlign='center'>
+                {
+                    profile.username === query.username
+                    ?(
+                        <Button>
+                            <Typography sx={{ alignItems:'center', display:'flex', justifyContent:'center' }}>
+                                Editar perfil
+                                <AiOutlineEdit/>
+                            </Typography>
+                        </Button>
+                    )
+                    :(
+                        <Button color='secondary' variant='outlined'>
+                            <Typography>Seguir</Typography>
+                        </Button>
+                    )
+                }
+
+
+
             </Box>
         </>
     

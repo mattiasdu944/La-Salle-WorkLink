@@ -5,7 +5,7 @@ import { signIn } from 'next-auth/react';
 import { ErrorMessage } from './';
 import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx'
 import { 
-    Box, Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography 
+    Box, Button, CircularProgress, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography 
 } from '@mui/material'
 import Link from 'next/link';
 
@@ -13,48 +13,57 @@ export const FormRegister: FC = () => {
     const { registerUser } = useContext( AuthContext );
 
     const [showPassword, setShowPassword] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
     const [registerForm, setLoginForm] = useState({ name:'', lastname:'', username:'', email:'', password:'', passwordConfirmation:'' });
     const [error, setError] = useState<string>();
 
 
 
     const handleSubmit = async ( e: FormEvent ) => {
-
-        const { email, lastname, name, password, passwordConfirmation, username } = registerForm;
         e.preventDefault();
+        const { email, lastname, name, password, passwordConfirmation, username } = registerForm;
+        setIsLoading(true);
 
         if( name.trim() == '' || name.trim().length < 4){
             setError('Ingrese un nombre valido');
+            setIsLoading(false);
             return;
         }
 
         if( lastname.trim() === '' || lastname.trim().length < 4){
             setError('Ingrese un apellido valido')
+            setIsLoading(false);
             return;
         }
 
         if( email.trim() === '' || email.trim().length < 4 ){
             setError('Ingrese una direccion de correo valido')
+            setIsLoading(false);
             return;
         }
 
         if( !email.includes('ulasalle') ){
             setError('Solo se permiten usuarios de La Salle')
+            setIsLoading(false);
             return;
         }
 
         if( username.trim().length < 4){
             setError('Nombre de usuario muy corto')
+            setIsLoading(false);
             return;
         }
         
         if( password.length < 8 ){
             setError('La contraseña debe tener minimo 8 caracteres')
+            setIsLoading(false);
             return;
         }
 
         if( password.trim() !== passwordConfirmation.trim() ){
             setError('Las contraseñas no coinciden')
+            setIsLoading(false);
             return;
         }
         setError( undefined );
@@ -68,6 +77,7 @@ export const FormRegister: FC = () => {
 
 
         await signIn('credentials', { email, password } );
+        setIsLoading(false);
     }
 
 
@@ -166,13 +176,18 @@ export const FormRegister: FC = () => {
                 </FormControl>
 
                 <Button type='submit' sx={{ mb:'1rem', width:'100%' }} variant="contained">
-                    Crear cuenta
+                {
+                    isLoading
+                    ?(
+                        <CircularProgress  sx={{ color:'#fff'}} size={20} thickness={2}/>
+                    )
+                    :(
+                        <Typography>
+                            Crear cuenta
+                        </Typography>
+                    )
+                }
                 </Button>
-                {/* <Typography mb='1rem' textAlign='center'>o</Typography>
-
-                <Button type='submit' variant="outlined" sx={{ mb:3 }}>
-                    Registrarse con Google
-                </Button> */}
                 <Link href='/auth/login'>
                     <Typography>
                         Ya tienes cuenta? Inicia Sesion.

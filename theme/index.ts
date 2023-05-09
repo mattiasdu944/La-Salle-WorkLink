@@ -55,8 +55,11 @@ export const lightTheme = createTheme({
                     lineHeight: 1.4
                 },
                 h1: {
-                    fontSize: 40,
+                    fontSize: 35,
                     fontWeight: 700,
+                    '@media(min-width: 780px)' : {
+                        fontSize: 40,
+                    }
                     
                 },
                 h2: {

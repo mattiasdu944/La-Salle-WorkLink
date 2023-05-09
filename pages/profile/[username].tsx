@@ -21,15 +21,17 @@ const UserProfile: NextPage<Props> = ({ profile }) => (
         />
 
 
+
         <AboutCard 
             description={ profile.description } 
             socialNetworks={ profile.socialNetworks }
         />
 
 
-        <Grid container>
-            <CertificatesCard />
-            <ExperienceCard />
+        <Grid container spacing={5}>
+
+            <CertificatesCard certificates={ profile.certificates }/>
+            <ExperienceCard experience={ profile.experience }/>
         </Grid>
 
 
