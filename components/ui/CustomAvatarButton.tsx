@@ -33,7 +33,11 @@ export const CustomAvatarButton: FC = () => {
                 'aria-labelledby': 'basic-button',
                 }}
             >
-                <Link href={`/profile/${ user?.username.trim() }`}>
+                <Link href={ 
+                    user?.role === 'student' 
+                    ? `/profile/${ user?.username.trim() }`
+                    : `/profile/company/${ user?.username.trim() }`
+                 }>
                     <MenuItem onClick={handleClose}>
                             <Typography textAlign="center">Perfil</Typography>
                     </MenuItem>

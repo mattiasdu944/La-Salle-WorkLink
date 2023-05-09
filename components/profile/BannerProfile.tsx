@@ -1,9 +1,10 @@
-import { FC } from 'react'
+import { FC, useContext } from 'react'
 import { IProfile } from '@/interfaces'
 import { useRouter } from 'next/router'
 
 import { Avatar, Box, Button, Typography } from '@mui/material'
 import { AiOutlineEdit } from 'react-icons/ai'
+import { AuthContext } from '@/context/auth'
 
 interface Props{
     profile: IProfile
@@ -12,6 +13,7 @@ interface Props{
 export const BannerProfile: FC<Props> = ({ profile }) => {
 
     const {query}  = useRouter();
+    const { user } = useContext(AuthContext);
 
     return (
         <>
@@ -62,7 +64,7 @@ export const BannerProfile: FC<Props> = ({ profile }) => {
 
             <Box mb={ '3rem' } mt={'1rem'} textAlign='center'>
                 {
-                    profile.username === query.username
+                    user?.username === query.username
                     ?(
                         <Button>
                             <Typography sx={{ alignItems:'center', display:'flex', justifyContent:'center' }}>
