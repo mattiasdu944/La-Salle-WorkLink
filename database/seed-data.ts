@@ -17,8 +17,8 @@ export const initialData: SeedData = {
         {
             name: 'Mattias Alexandre',
             lastname: 'Duarte Aparicio',
-            username:   '104924121',
-            email: 'duartemattias4@gmail.com',
+            username:   'mattias',
+            email: 'maduarte@est.ulasalle.edu.bo',
             password: bcrypt.hashSync( '+Mduarte2023', 10),
             role: 'student'
         }

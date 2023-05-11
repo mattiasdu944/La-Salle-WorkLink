@@ -44,7 +44,7 @@ const UserProfile: NextPage<Props> = ({ profile }) => (
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 
     const { username } = query as { username: string }
-
+console.log(username);
     const profile = await  dbUsers.getUserProfile(username);
     return {
         props: {

@@ -7,6 +7,7 @@ export interface IUser {
     password?   : string;
     role        : string;
     image       : string;
+    token       : string;
     createdAt?   : string;
     updatedAt?   : string;
 }

@@ -1,19 +1,22 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-
 import { db } from '@/database';
 import { User, UserProfile } from '@/models';
+
+
 import bcrypt from 'bcrypt';
+import { generarJWT } from '@/helpers/generar-jwt';
 
 
 
 type Data = 
 | { message: string }
 | {
-    // token: string;
+    token: string;
     user: {
         email: string;
         name: string;
         role: string;
+        image: string;
     }
 }
 
@@ -31,7 +34,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 }
 
 const registerUser = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
-    
     const { email = '', password = '', name = '', lastname= '', username= '' } = req.body as { email: string, password: string, name: string, lastname: string, username: string };
 
     if ( password.trim().length < 6 ) {
@@ -79,7 +81,6 @@ const registerUser = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
         role: 'student',
     });
 
-    console.log({newUser});
 
     const newUserProfile = new UserProfile({
         user: newUser._id
@@ -95,16 +96,22 @@ const registerUser = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
             message: 'Revisar logs del servidor'
         })
     }
+    await db.disconnect();
    
-    const { role } = newUser;
+    const { role, image } = newUser;
 
+    // Generar el JWT
+    const token = await generarJWT( newUser._id );
+    
 
     return res.status(200).json({
         user: {
             email, 
             role, 
             name,
-        }
+            image
+        },
+        token
     })
 
 
