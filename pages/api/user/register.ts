@@ -72,6 +72,8 @@ const registerUser = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
         })
     }
 
+    
+    
     const newUser = new User({
         name: name.trim(),
         lastname: lastname.trim(),
@@ -81,13 +83,16 @@ const registerUser = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
         role: 'student',
     });
 
+    
+    newUser.token = await generarJWT( newUser._id )
+    console.log({newUser});
 
     const newUserProfile = new UserProfile({
         user: newUser._id
     })
 
     try {
-        await newUser.save({ validateBeforeSave: true });
+        await newUser.save();
         await newUserProfile.save();
 
     } catch (error) {
@@ -98,11 +103,8 @@ const registerUser = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
     }
     await db.disconnect();
    
-    const { role, image } = newUser;
+    const { role, image, token } = newUser;
 
-    // Generar el JWT
-    const token = await generarJWT( newUser._id );
-    
 
     return res.status(200).json({
         user: {

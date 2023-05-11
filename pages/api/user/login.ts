@@ -13,6 +13,8 @@ type Data =
 | {
     token: string;
     user: {
+        _id : string,
+        username: string,
         email: string;
         name: string;
         role: string;
@@ -64,13 +66,20 @@ const loginUser = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
         })
     }
 
+    const token = await generarJWT(user._id)
+    
+    await db.connect();
+    user.token = token;
+    await user.save();
+    await db.disconnect();
 
-    // Generar el JWT
-    const token = await generarJWT( user._id );
-    const { role, name, image } = user;
+    const { role, name, _id, username, image } = user;
+
 
     return res.status(200).json({
         user: {
+            _id,
+            username,
             email, 
             role, 
             name,
