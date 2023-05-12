@@ -13,6 +13,8 @@ type Data =
 | {
     token: string;
     user: {
+        _id : string,
+        username: string,
         email: string;
         name: string;
         role: string;
@@ -103,11 +105,13 @@ const registerUser = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
     }
     await db.disconnect();
    
-    const { role, image, token } = newUser;
+    const { role, image, token , _id} = newUser;
 
 
     return res.status(200).json({
         user: {
+            _id,
+            username,
             email, 
             role, 
             name,
