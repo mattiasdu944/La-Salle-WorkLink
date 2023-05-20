@@ -2,21 +2,14 @@ import mongoose, { Model, Schema, model } from "mongoose";
 
 const companySchema = new Schema({
     name        : { type: String, trim: true, required: true },
+    email       : { type: String, trim: true, required: true },
     description : { type: String, trim: true, default:'' },
     location    : { type: String, trim: true, default:'' },
-    contact     : { 
-        type: {
-            email: String,
-            phone: String,
-        },
-        default: {
-            email: '',
-            phone: '',    
-        }
-    },
+    phone       : { type: String, trim: true, default:'' },
+    
     website     : { type: String, trim: true, default:'' }, 
-    password: { type: String, required: true },
-    token   : { type: String },
+    password    : { type: String, required: true },
+    token       : { type: String },
 
     username    : { type: String, required: true, unique: true },    
     vacancies   : [{ type : Schema.Types.ObjectId , ref: 'Vacant' }],

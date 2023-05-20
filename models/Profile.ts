@@ -35,6 +35,6 @@ const userProfileSchema = new Schema({
     }],
 },{ timestamps: true });
 
-const UserProfile:Model<IUserProfile> = mongoose.models.UserProfile  || model('UserProfile', userProfileSchema);
+const Profile:Model<IUserProfile> = mongoose.models.Profile  || model('Profile', userProfileSchema);
 
-export default UserProfile;
+export default Profile;

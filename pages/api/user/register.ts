@@ -1,12 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { db } from '@/database';
-import { User, UserProfile } from '@/models';
+import { User, Profile, Company } from '@/models';
 
 
 import bcrypt from 'bcrypt';
 import { generarJWT } from '@/helpers/generar-jwt';
-
-
 
 type Data = 
 | { message: string }
@@ -36,8 +34,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 }
 
 const registerUser = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
-    const { email = '', password = '', name = '', lastname= '', username= '' } = req.body as { email: string, password: string, name: string, lastname: string, username: string };
+    const { email = '', password = '', name = '', lastname= '', username= '', role= '' } = req.body as { email: string, password: string, name: string, lastname: string, username: string, role: string };
 
+    // Validaciones
     if ( password.trim().length < 6 ) {
         return res.status(400).json({
             message: 'La contraseña debe de ser de 6 caracteres'
@@ -57,68 +56,121 @@ const registerUser = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
     }
     
     
-    await db.connect();
-    const user = await User.findOne({ email });
+    switch (role) {
+        case 'student':           
+            await db.connect();
+            const user = await User.findOne({ email });
+            
+            if ( user ) {
+                return res.status(400).json({
+                    message:'No puede usar ese correo'
+                })
+            }
+        
+            const checkUsername = await User.findOne({ username });
+        
+            if ( checkUsername ) {
+                return res.status(400).json({
+                    message:'No puede usar ese nombre de usuario'
+                })
+            }
+            
+            const newUser = new User({
+                name: name.trim(),
+                lastname: lastname.trim(),
+                password: bcrypt.hashSync( password.trim(), 10 ),
+                email: email.toLocaleLowerCase().trim(),
+                username: username.toLocaleLowerCase().trim(),
+                role,
+            });
+        
+            
+            newUser.token = await generarJWT( newUser._id )
+            const newProfile = new Profile({
+                user: newUser._id
+            })
+        
+            try {
+                await newUser.save();
+                await newProfile.save();
+        
+            } catch (error) {
+                return res.status(500).json({
+                    message: 'Revisar logs del servidor'
+                })
+            }
+            await db.disconnect();
 
-    if ( user ) {
-        return res.status(400).json({
-            message:'No puede usar ese correo'
-        })
-    }
+            const { image, token , _id} = newUser;
 
-    const checkUsername = await User.findOne({ username });
+            return res.status(200).json({
+                user: {
+                    _id,
+                    username,
+                    email, 
+                    role, 
+                    name,
+                    image
+                },
+                token
+            });
 
-    if ( checkUsername ) {
-        return res.status(400).json({
-            message:'No puede usar ese nombre de usuario'
-        })
-    }
+        case 'company':
+            await db.connect();
+            const company = await Company.findOne({ email });
+            
+            if ( company ) {
+                return res.status(400).json({
+                    message:'No puede usar ese correo'
+                })
+            }
+        
+            const companyUsername = await User.findOne({ username });
+        
+            if ( companyUsername ) {
+                return res.status(400).json({
+                    message:'No puede usar ese nombre de usuario'
+                })
+            }
+        
+            
+            
+            const newCompany = new User({
+                name: name.trim(),
+                lastname: lastname.trim(),
+                password: bcrypt.hashSync( password.trim(), 10 ),
+                email: email.toLocaleLowerCase().trim(),
+                username: username.toLocaleLowerCase().trim(),
+                role,
+            });
+        
+            
+            newCompany.token = await generarJWT( newCompany._id )
+            
+            try {
+                await newCompany.save();
+            } catch (error) {
+                return res.status(500).json({
+                    message: 'Revisar logs del servidor'
+                })
+            }
 
+            await db.disconnect();
+
+            return res.status(200).json({
+                user: {
+                    _id: newCompany._id,
+                    username,
+                    email, 
+                    role, 
+                    name,
+                    image: newCompany.image
+                },
+                token: newCompany.token
+            });       
     
-    
-    const newUser = new User({
-        name: name.trim(),
-        lastname: lastname.trim(),
-        password: bcrypt.hashSync( password.trim(), 10 ),
-        email: email.toLocaleLowerCase().trim(),
-        username: username.toLocaleLowerCase().trim(),
-        role: 'student',
-    });
-
-    
-    newUser.token = await generarJWT( newUser._id )
-    console.log({newUser});
-
-    const newUserProfile = new UserProfile({
-        user: newUser._id
-    })
-
-    try {
-        await newUser.save();
-        await newUserProfile.save();
-
-    } catch (error) {
-        console.log(error);
-        return res.status(500).json({
-            message: 'Revisar logs del servidor'
-        })
+        default:
+            break;
     }
-    await db.disconnect();
-   
-    const { role, image, token , _id} = newUser;
-
-
-    return res.status(200).json({
-        user: {
-            _id,
-            username,
-            email, 
-            role, 
-            name,
-            image
-        },
-        token
-    })
-
 
 }

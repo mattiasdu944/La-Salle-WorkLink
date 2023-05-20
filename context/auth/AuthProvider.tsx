@@ -38,46 +38,10 @@ export const AuthProvider:FC<any> = ({ children }) => {
     
 
 
-    // useEffect(() => {
-    //     checkToken();
-    // }, [])
 
-    // const checkToken = async() => {
-
-    //     if ( !Cookies.get('token') ) {
-    //         return;
-    //     }
-
-    //     try {
-    //         const { data } = await tesloApi.get('/user/validate-token');
-    //         const { token, user } = data;
-    //         Cookies.set('token', token );
-    //         dispatch({ type: '[Auth] - Login', payload: user });
-    //     } catch (error) {
-    //         Cookies.remove('token');
-    //     }
-    // }
-    
-
-
-    // const loginUser = async( email: string, password: string ): Promise<boolean> => {
-
-    //     try {
-    //         const { data } = await tesloApi.post('/user/login', { email, password });
-    //         const { token, user } = data;
-    //         Cookies.set('token', token );
-    //         dispatch({ type: '[Auth] - Login', payload: user });
-    //         return true;
-    //     } catch (error) {
-    //         return false;
-    //     }
-
-    // }
-
-
-    const registerUser = async(email: string, password: string, name: string, lastname: string, username: string): Promise<{hasError: boolean; message?: string}> => {
+    const registerUser = async(email: string, password: string, name: string, lastname: string, username: string, role: string): Promise<{hasError: boolean; message?: string}> => {
         try {
-            const { data } = await worklinkApi.post('/user/register', { name, email, password, lastname, username });
+            const { data } = await worklinkApi.post('/user/register', { name, email, password, lastname, username, role });
             const { user } = data;
             
             dispatch({ type: '[Auth] - Login', payload: user });

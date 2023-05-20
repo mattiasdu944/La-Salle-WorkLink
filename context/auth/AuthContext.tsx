@@ -7,7 +7,7 @@ import { IUser } from '../../interfaces';
 interface ContextProps {
     isLoggedIn: boolean;
     user?: IUser;
-    registerUser: (email: string, password: string, name: string, lastname: string, username: string) => Promise<{ hasError: boolean; message?: string; }>;
+    registerUser: (email: string, password: string, name: string, lastname: string, username: string, role: string) => Promise<{ hasError: boolean; message?: string; }>;
     logout: () => void;
 }
 

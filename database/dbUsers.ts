@@ -2,7 +2,7 @@ import { db } from "."
 import bcrypt from "bcrypt";
 import User from "@/models/User";
 import { IUser } from "@/interfaces";
-import { UserProfile } from "@/models";
+import { Profile } from "@/models";
 
 export const checkUserEmailPassword =async (email:string, password: string) => {
     await db.connect();
@@ -52,7 +52,7 @@ export const oAuthToDbUser =async (oAuthEmail: string, oAuthName: string ) => {
 export const getUserProfile =async ( username: string ): Promise<any | null> => {
     await db.connect();
     const user = await User.findOne<IUser>({ username });
-    const profile = await UserProfile.findOne({ user:user!._id }).select('-_id -user -createdAt -updatedAt -__v').lean();
+    const profile = await Profile.findOne({ user:user!._id }).select('-_id -user -createdAt -updatedAt -__v').lean();
     await db.disconnect();
 
     const { email, name, lastname, image, role } = user!;
