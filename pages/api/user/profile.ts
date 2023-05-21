@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { db } from '@/database';
-import { User, UserProfile } from '@/models';
+import { User, Profile } from '@/models';
 
 import { IUser, IUserProfile } from '@/interfaces';
 
@@ -37,7 +37,7 @@ const getUserProfile = async(req: NextApiRequest, res: NextApiResponse<Data>) =>
 
     await db.connect();
     const user = await User.findOne<IUser>({ username });
-    const profile = await UserProfile.findOne<IUserProfile>({ user:user!._id }).select('-_id -user -createdAt -updatedAt -__v').lean();
+    const profile = await Profile.findOne<IUserProfile>({ user:user!._id }).select('-_id -user -createdAt -updatedAt -__v').lean();
     await db.disconnect();
 
     const { email, name, lastname, image, role } = user!;
