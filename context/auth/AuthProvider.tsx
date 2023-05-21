@@ -64,6 +64,33 @@ export const AuthProvider:FC<any> = ({ children }) => {
         }
     }
 
+    
+
+    const registerCompany = async(email: string, password: string, name: string, username: string, role: string): Promise<{hasError: boolean; message?: string}> => {
+        try {
+            const { data } = await worklinkApi.post('/user/register', { name, email, password, username, role });
+            const { user } = data;
+            
+            dispatch({ type: '[Auth] - Login', payload: user });
+            return {
+                hasError: false
+            }
+
+        } catch (error) {
+            if ( axios.isAxiosError(error) ) {
+                return {
+                    hasError: true,
+                    message: error.response?.data.message
+                }
+            }
+
+            return {
+                hasError: true,
+                message: 'No se pudo crear el usuario - intente de nuevo'
+            }
+        }
+    }
+
 
     const logout = () => {
         signOut();
@@ -78,6 +105,7 @@ export const AuthProvider:FC<any> = ({ children }) => {
             // Methods
             // loginUser,
             registerUser,
+            registerCompany,
             logout,
         }}>
             { children }
