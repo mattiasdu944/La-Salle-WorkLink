@@ -1,16 +1,14 @@
+import { FormRegisterCompany } from '@/components'
+import { Box, Container, Grid } from '@mui/material'
+import { NextPage } from 'next'
 import Head from 'next/head'
-import { NextPage } from 'next';
-import { GetServerSideProps } from 'next'
+import React from 'react'
 
-import { FormLogin, SideBanner } from '@/components';
-import { Box, Container, Grid, Typography } from '@mui/material'
-import { getSession } from 'next-auth/react';
-
-const LoginPage: NextPage = () => {
+const RegisteCompany: NextPage = () => {
     return (
         <>
             <Head>
-                <title>WorkLink - Inicia Sesion</title>
+                <title>WorkLink - Empresas</title>
             </Head>
 
             <Grid
@@ -26,7 +24,7 @@ const LoginPage: NextPage = () => {
                 <Grid
                     item xs={ 12 } md={ 6 }
                     sx={{
-                        backgroundImage:"url('https://ulasalle.edu.bo/lp/wp-content/uploads/2021/11/BANNER-2021_LA-SALLE-BOLIVIA.png')",
+                        backgroundImage:"url('https://images.pexels.com/photos/443383/pexels-photo-443383.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')",
                         backgroundRepeat:'no-repeat',
                         backgroundSize:'cover',
                         backgroundBlendMode:'color',
@@ -46,38 +44,11 @@ const LoginPage: NextPage = () => {
                     alignItems: 'center',
                     flexDirection: 'column',
                 }}>
-                    <FormLogin/>
+                    <FormRegisterCompany/>
                 </Grid>
             </Grid>
         </>
     )
 }
 
-
-
-
-export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
-    const session = await getSession({ req });
-
-    const { p = '/' } = query;
-
-    if( session ){
-        return {
-            redirect: {
-                destination: p.toString(),
-                permanent: false 
-            }
-        }
-    } 
-
-
-    return {
-        props: {
-            
-        }
-    }
-}
-
-
-
-export default LoginPage
+export default RegisteCompany
