@@ -1,6 +1,7 @@
 import { dbUsers } from "@/database";
 import NextAuth from "next-auth/next";
 import Credentials from "next-auth/providers/credentials";
+import { checkUserEmailPasswordCompany } from '../../../database/dbUsers';
 
 
 export default NextAuth({
@@ -12,7 +13,17 @@ export default NextAuth({
                 password: { label: 'Contraseña:', type: 'password', placeholder: 'Contraseña' },
             },
             async authorize(credentials) {
-                return await dbUsers.checkUserEmailPassword(credentials!.email, credentials!.password) as any;
+
+                const user = await dbUsers.checkUserEmailPasswordUser(credentials!.email, credentials!.password) as any;
+                const company = await dbUsers.checkUserEmailPasswordCompany(credentials!.email, credentials!.password) as any;
+
+                if( user ){
+                    return user;
+                }
+                if( company ){
+                    return company;
+                }
+                return null
             }
         }),
 
