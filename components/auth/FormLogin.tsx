@@ -8,6 +8,7 @@ import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx'
 import { 
     Box, Button, CircularProgress, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography 
 } from '@mui/material'
+import { validateLogin } from '@/helpers/validate-forms';
 
 export const FormLogin:FC = () => {
 
@@ -21,17 +22,12 @@ export const FormLogin:FC = () => {
         e.preventDefault();
         setIsLoading(true);
         
-        if( loginForm.email.trim() === '' ){
-            setError('Ingrese un correo valido')
-            setIsLoading(false);
+        validateLogin(loginForm, setError, setIsLoading);
+        
+        if( error != undefined ){
             return;
         }
-        if( loginForm.password.length < 8 ){
-            setError('La contraseña debe tener minimo 8 caracteres')
-            setIsLoading(false);
-            return;
-        }
-        setError( undefined );
+        
         await signIn('credentials', { email: loginForm.email, password: loginForm.password });
         setIsLoading(false);
     }

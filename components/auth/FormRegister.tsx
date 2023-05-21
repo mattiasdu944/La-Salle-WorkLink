@@ -163,9 +163,17 @@ export const FormRegister: FC = () => {
                     )
                 }
                 </Button>
-                <Link href='/auth/login'>
+                
+
+                <Link style={{ marginBottom:10 }} href='/auth/login'>
                     <Typography>
                         Ya tienes cuenta? Inicia Sesion.
+                    </Typography>
+                </Link>
+                
+                <Link href='/auth/register/company'>
+                    <Typography>
+                        ¿Quieres registrar tu empresa?.
                     </Typography>
                 </Link>
             </Box>      
