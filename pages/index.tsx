@@ -7,7 +7,6 @@ import { MainLayout } from '@/layouts';
 const HomePage:NextPage = () => {
 
     const { user, isLoggedIn } = useContext(AuthContext);
-    console.log({user, isLoggedIn});
 
 
     return (

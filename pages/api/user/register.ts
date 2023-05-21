@@ -83,7 +83,6 @@ const registerUser = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
                 password: bcrypt.hashSync( password.trim(), 10 ),
                 email: email.toLocaleLowerCase().trim(),
                 username: username.toLocaleLowerCase().trim(),
-                role,
             });
         
             

@@ -1,4 +1,5 @@
 export * from './auth'
+export * from './company'
 export * from './jobs'
 export * from './profile'
 export * from './ui'

@@ -5,9 +5,9 @@ export interface IUser {
     username    : string;
     email       : string;
     password?   : string;
-    role        : string;
     image       : string;
     token       : string;
+    role       : string;
     createdAt?   : string;
     updatedAt?   : string;
 }

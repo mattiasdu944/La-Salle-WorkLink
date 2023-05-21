@@ -58,6 +58,7 @@ const LoginPage: NextPage = () => {
 
 export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
     const session = await getSession({ req });
+    console.log(session);
 
     const { p = '/' } = query;
 

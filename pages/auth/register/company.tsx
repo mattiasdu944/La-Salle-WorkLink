@@ -1,8 +1,10 @@
+import React from 'react'
+import Head from 'next/head'
+import { getSession } from 'next-auth/react'
+import { GetServerSideProps, NextPage } from 'next'
+
 import { FormRegisterCompany } from '@/components'
 import { Box, Container, Grid } from '@mui/material'
-import { NextPage } from 'next'
-import Head from 'next/head'
-import React from 'react'
 
 const RegisteCompany: NextPage = () => {
     return (
@@ -50,5 +52,30 @@ const RegisteCompany: NextPage = () => {
         </>
     )
 }
+
+
+export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
+    const session = await getSession({ req });
+    console.log(session);
+
+    const { p = '/' } = query;
+
+
+    if( session ){
+        return {
+            redirect: {
+                destination: p.toString(),
+                permanent: false 
+            }
+        }
+    } 
+
+    return {
+        props: {
+            
+        }
+    }
+}
+
 
 export default RegisteCompany

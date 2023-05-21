@@ -33,6 +33,7 @@ const userProfileSchema = new Schema({
             url: String,
         }
     }],
+    applications   : [{ type : Schema.Types.ObjectId , ref: 'Vacant' }],
 },{ timestamps: true });
 
 const Profile:Model<IUserProfile> = mongoose.models.Profile  || model('Profile', userProfileSchema);

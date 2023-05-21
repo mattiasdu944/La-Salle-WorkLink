@@ -38,6 +38,14 @@ export const AppBarMenu: FC<Props> = ({ isMenuOpen, setIsMenuOpen }) => {
                     <Link href='/jobs' passHref>
                         <Typography>Empleos</Typography>
                     </Link>
+                    {
+                        user?.role == 'company'
+                        && (
+                            <Link href='/jobs/new' passHref>
+                                <Typography>Crear empleo</Typography>
+                            </Link>
+                        )
+                    }
                 </Box>
 
                 <Box flex={1} />
