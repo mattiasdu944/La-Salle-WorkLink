@@ -36,6 +36,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 const registerUser = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
     const { email = '', password = '', name = '', lastname= '', username= '', role= '' } = req.body as { email: string, password: string, name: string, lastname: string, username: string, role: string };
 
+    console.log(req.body);
+
     // Validaciones
     if ( password.trim().length < 6 ) {
         return res.status(400).json({
@@ -125,7 +127,7 @@ const registerUser = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
                 })
             }
         
-            const companyUsername = await User.findOne({ username });
+            const companyUsername = await Company.findOne({ username });
         
             if ( companyUsername ) {
                 return res.status(400).json({
@@ -135,15 +137,14 @@ const registerUser = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
         
             
             
-            const newCompany = new User({
+            const newCompany = new Company({
                 name: name.trim(),
-                lastname: lastname.trim(),
                 password: bcrypt.hashSync( password.trim(), 10 ),
                 email: email.toLocaleLowerCase().trim(),
                 username: username.toLocaleLowerCase().trim(),
-                role,
             });
-        
+            
+            console.log(newCompany);
             
             newCompany.token = await generarJWT( newCompany._id )
             
@@ -162,7 +163,7 @@ const registerUser = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
                     _id: newCompany._id,
                     username,
                     email, 
-                    role, 
+                    role: 'company', 
                     name,
                     image: newCompany.image
                 },
