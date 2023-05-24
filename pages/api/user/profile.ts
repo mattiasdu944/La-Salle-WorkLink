@@ -1,22 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { db } from '@/database';
-import { User, Profile } from '@/models';
+import { User, Profile, Company } from '@/models';
 
-import { IUser, IUserProfile } from '@/interfaces';
+import { ICompany, IUser, IUserProfile } from '@/interfaces';
+import { IProfile } from '../../../interfaces/profile';
 
 
 
 type Data = 
 | { message: string }
-| {
-    email       : string, 
-    name        : string, 
-    lastname    : string, 
-    image       : string, 
-    role        : string,
-    username    : string,
-    profile     : IUserProfile
-}
+| IProfile
+| ICompany 
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
     
@@ -37,22 +31,32 @@ const getUserProfile = async(req: NextApiRequest, res: NextApiResponse<Data>) =>
 
     await db.connect();
     const user = await User.findOne<IUser>({ username });
-    const profile = await Profile.findOne<IUserProfile>({ user:user!._id }).select('-_id -user -createdAt -updatedAt -__v').lean();
     await db.disconnect();
 
-    const { email, name, lastname, image, role } = user!;
+    if( user ){
+        await db.connect();
+        const profile = await Profile.findOne({ user:user!._id }).select('-_id -user -createdAt -updatedAt -__v').lean();
+        await db.disconnect();
+    
+        const { email, name, lastname, image } = user!;
+    
+    
+        return res.status(200).json({ email, name, lastname, image, ...profile } as IProfile )
+    
+    
+    }
+    
+
+    
+    await db.connect();
+    const company = await Company.findOne<ICompany>({ username }).select('-_id -token -createdAt -updatedAt -__v');
+    await db.disconnect();
+
+    if( company ){
+        return res.status(200).json( company );
+    }
 
 
-    return res.status(200).json(
-        {
-            email, 
-            name, 
-            lastname, 
-            image, 
-            role,
-            username,
-            profile: profile!
-        }
-    )
-
+    
+    return res.status(404).json({ message:'User not found' });
 }

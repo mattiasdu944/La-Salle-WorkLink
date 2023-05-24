@@ -1,6 +1,11 @@
 
 export interface IUserProfile {
-    user            : string;
+    email           : string, 
+    name            : string, 
+    lastname        : string, 
+    image           : string, 
+    role            : string,
+    username        : string,
     description     : string;
     phone           : string;
     birthday        : string;
