@@ -32,7 +32,7 @@ const vacantSchema = new Schema({
     benefits    : [{ type: String, trim: true, required: true }],
     deadline    : { type: String, require:true, },
     image       : { type: String, trim: true, default:'https://images.pexels.com/photos/1595385/pexels-photo-1595385.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2' },
-
+    views       : { type: Number, default: 0 }
 },{ timestamps: true });
 
 const Vacant:Model<any> = mongoose.models.Vacant  || model('Vacant', vacantSchema);
