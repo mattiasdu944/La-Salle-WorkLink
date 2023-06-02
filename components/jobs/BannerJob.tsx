@@ -5,8 +5,8 @@ export const BannerJob: FC = () => {
     return (
         <Box
             sx={{
-                backgroundImage:`url(https://static.licdn.com/sc/h/55k1z8997gh8dwtihm11aajyq)`,
-                backgroundPosition:'center center',
+                backgroundImage:`url(https://images.pexels.com/photos/3184296/pexels-photo-3184296.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)`,
+                backgroundPosition:'center bottom',
                 backgroundSize:'cover',
                 padding:'3rem',
                 position:'relative',    
@@ -17,7 +17,7 @@ export const BannerJob: FC = () => {
         >
             <Box
                 sx={{
-                    backgroundColor:'rgba(255,255,255,0.85)',
+                    backgroundColor:'rgba(255,255,255,0.55)',
                     borderRadius:'1rem',
                     maxWidth:{ xs:'70%', md:'80%' }, 
                     backdropFilter:'blur(10px)',

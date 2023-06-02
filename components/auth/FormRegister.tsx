@@ -68,6 +68,8 @@ export const FormRegister: FC = () => {
                     flexDirection: 'column',
                     background:'#fff',
                     maxWidth: '500px',
+                    border:'1px solid rgba(0,0,0,0.08)',
+
                     boxShadow:'0px 10px 15px rgba(0,0,0,.05)',
                     padding: { xs:'2rem', md:'3rem 5rem' },
                     borderRadius: '.5rem'

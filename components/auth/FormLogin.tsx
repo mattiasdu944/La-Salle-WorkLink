@@ -12,7 +12,7 @@ import { validateLogin } from '@/helpers/validate-forms';
 
 export const FormLogin:FC = () => {
 
-    const [showPassword, setShowPassword] = useState(true);
+    const [showPassword, setShowPassword] = useState(false);
     const [loginForm, setLoginForm] = useState({ email:'', password:'' });
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState<string>()
@@ -53,6 +53,7 @@ export const FormLogin:FC = () => {
                     flexDirection: 'column',
                     background:'#fff',
                     maxWidth: '500px',
+                    border:'1px solid rgba(0,0,0,0.08)',
                     boxShadow:'0px 10px 15px rgba(0,0,0,.05)',
                     padding: { xs:'4rem 2rem', md:'5rem' },
                     borderRadius: '.5rem'

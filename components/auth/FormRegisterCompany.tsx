@@ -68,6 +68,7 @@ export const FormRegisterCompany: FC = () => {
                     alignItems: 'center',
                     flexDirection: 'column',
                     background: '#fff',
+                    border:'1px solid rgba(0,0,0,0.08)',
                     maxWidth: '500px',
                     boxShadow: '0px 10px 15px rgba(0,0,0,.05)',
                     padding: { xs: '2rem', md: '3rem 5rem' },

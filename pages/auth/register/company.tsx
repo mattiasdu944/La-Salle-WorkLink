@@ -20,7 +20,7 @@ const RegisteCompany: NextPage = () => {
                 sx={{  
                     minHeight:'100vh',
                     alignItems:'center',
-                    background:'#f9f6fc',
+                    // background:'#f9f6fc',
                 }}  
             >
                 <Grid
