@@ -1,5 +1,6 @@
-import { db, seedDatabase } from '@/database';
-import User from '@/models/User';
+import { db, initialCompanies, seedDatabase } from '@/database';
+import { initialVacancies } from '@/database/vacancies';
+import { Company, Vacant, User } from '@/models';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 type Data = { message: string }
@@ -13,8 +14,14 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
     }
 
     await db.connect();
-    await User.deleteMany();
-    await User.insertMany( seedDatabase.initialData.users );
+    // await User.deleteMany();
+    // await User.insertMany( seedDatabase.initialData.users );
+    
+    await Company.deleteMany();
+    await Company.insertMany( initialCompanies.companies );
+
+    // await Vacant.deleteMany();
+    // await Vacant.insertMany( initialVacancies.vacancies );
     await db.disconnect();
 
 
