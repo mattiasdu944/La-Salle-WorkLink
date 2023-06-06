@@ -12,10 +12,7 @@ export const initialCompanies = {
             password    :  bcrypt.hashSync('123123123', 10),
             token       : '',
         
-            username    : 'samsung_bo',    
-            vacancies   : [
-                '647d437f8c8831ab8fadf782'
-            ],
+            username    : 'samsung_bo',
             image       : 'https://media.licdn.com/dms/image/C4D0BAQGBZ01Ui5Kh2Q/company-logo_200_200/0/1674582891713?e=1694044800&v=beta&t=7mUWy0-WHw9UbEX3n86O49D2CXrwvjPMRQl1wdS8xs4',
             banner      : 'https://media.licdn.com/dms/image/C511BAQFQBO107sUQAg/company-background_10000/0/1562827604955?e=1686535200&v=beta&t=v2vvn3WMIEb2_glpk47aV4-Nmf2-JSXM6wVz2RbrTxU'
         },
@@ -30,10 +27,7 @@ export const initialCompanies = {
             password    :  bcrypt.hashSync('123123123', 10),
             token       : '',
         
-            username    : 'huawei_bo',    
-            vacancies   : [
-                '647d437f8c8831ab8fadf785'
-            ],
+            username    : 'huawei_bo',
             image       : 'https://media.licdn.com/dms/image/C4E0BAQFzmdL6i2dnBQ/company-logo_200_200/0/1630549290219?e=1694044800&v=beta&t=-9iGQNTqrmBFo4_nuCZ0JuizPttl59uM_VBDzltEUJE',
             banner      : 'https://media.licdn.com/dms/image/C4E1BAQEo8abkVimgQA/company-background_10000/0/1630549537678?e=1686535200&v=beta&t=P188DpGOYMJZp0EbRi62wCRItokXuXHjh9weSdZXM70'
         },
@@ -48,10 +42,7 @@ export const initialCompanies = {
             password    :  bcrypt.hashSync('123123123', 10),
             token       : '',
         
-            username    : 'tigo_bo',    
-            vacancies   : [
-                '647d437f8c8831ab8fadf788'
-            ],
+            username    : 'tigo_bo',
             image       : 'https://media.licdn.com/dms/image/C4E0BAQE9wwHnVM9N3w/company-logo_200_200/0/1593705355140?e=1694044800&v=beta&t=O91eq0nhh13gsFa322c_xvTv_Y6q8evXTF9XFJMLDCM',
             banner      : 'https://media.licdn.com/dms/image/C4E3DAQG-1Vvh3YHVKw/image-scale_191_1128/0/1680525043791?e=1686535200&v=beta&t=R77A3CEpvBA9kgJ6bpNgdayEUeVx_q1dF1-AxNk5g2E'
         },
@@ -66,10 +57,7 @@ export const initialCompanies = {
             password    :  bcrypt.hashSync('123123123', 10),
             token       : '',
         
-            username    : 'cbn',    
-            vacancies   : [
-                '647d437f8c8831ab8fadf78b'
-            ],
+            username    : 'cbn',
             image       : 'https://media.licdn.com/dms/image/D4E0BAQGvsp8Krewwbg/company-logo_200_200/0/1665412814201?e=1694044800&v=beta&t=hQVPATeIvV_RVfWypSY5EHviOmkOjRbruULcAxfOJCE',
             banner      : 'https://media.licdn.com/dms/image/D4E3DAQHeDTPfDA5k_w/image-scale_191_1128/0/1665413808932?e=1686535200&v=beta&t=pAtK8t1vYFpPLTJ4tD0LllJvvbUkBwAKBY5ygPEXp38'
         },

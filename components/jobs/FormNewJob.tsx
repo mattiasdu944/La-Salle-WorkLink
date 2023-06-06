@@ -1,16 +1,16 @@
 import { ChangeEvent, Dispatch, FC, FormEvent, SetStateAction, useState } from 'react'
 
-import { IVacant, IVacantRequirements } from '@/interfaces'
+import { IVacant, Requirements } from '@/interfaces'
 import { Box, Button, FilledInput, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
 
 interface Props {
     setNewJob: Dispatch<SetStateAction<IVacant>>
     setBenefits: Dispatch<SetStateAction<string[]>>;
-    setRequirements: Dispatch<SetStateAction<IVacantRequirements>>
+    setRequirements: Dispatch<SetStateAction<Requirements>>
     
     newJob: IVacant;
     benefits: string[];
-    requirements: IVacantRequirements;
+    requirements: Requirements;
 }
 
 export const FormNewJob: FC<Props> = ({ setNewJob, newJob, requirements, setRequirements, benefits, setBenefits }) => {

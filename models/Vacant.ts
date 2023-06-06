@@ -1,6 +1,8 @@
+import { IVacant } from "@/interfaces";
 import mongoose, { Model, Schema, model } from "mongoose";
 
 const vacantSchema = new Schema({
+    company   : { type : mongoose.Schema.Types.ObjectId , ref: 'Company' },
     title           : { type: String, trim: true, required: true },
     description     : { type: String, trim: true, required: true },
     requirements    : { 
@@ -33,8 +35,8 @@ const vacantSchema = new Schema({
     deadline    : { type: String, require:true, },
     image       : { type: String, trim: true, default:'https://images.pexels.com/photos/1595385/pexels-photo-1595385.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2' },
     views       : { type: Number, default: 0 }
-},{ timestamps: true });
+},{ timestamps: true, strict: false });
 
-const Vacant:Model<any> = mongoose.models.Vacant  || model('Vacant', vacantSchema);
+const Vacant:Model<IVacant> = mongoose.models.Vacant  || model('Vacant', vacantSchema);
 
 export default Vacant;

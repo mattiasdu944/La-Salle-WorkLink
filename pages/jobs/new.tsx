@@ -3,11 +3,11 @@ import { MainLayout } from '@/layouts'
 
 import { Typography } from '@mui/material';
 import { FormNewJob } from '../../components';
-import { IVacant, IVacantRequirements } from '@/interfaces';
+import { IVacant, Requirements } from '@/interfaces';
 
 const NewJob = () => {
     
-    const [requirements, setRequirements] = useState<IVacantRequirements>({ 
+    const [requirements, setRequirements] = useState<Requirements>({ 
         experience  : '',
         skills      : '',
         education   : '',

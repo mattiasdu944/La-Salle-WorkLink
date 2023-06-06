@@ -1,3 +1,4 @@
+import { ICompany } from "@/interfaces";
 import mongoose, { Model, Schema, model } from "mongoose";
 
 const companySchema = new Schema({
@@ -12,11 +13,11 @@ const companySchema = new Schema({
     token       : { type: String },
 
     username    : { type: String, required: true, unique: true },    
-    vacancies   : [{ type : Schema.Types.ObjectId , ref: 'Vacant' }],
+    // vacancies   : [{ type : mongoose.Schema.Types.ObjectId , ref: 'Vacant' }],
     image       : { type: String, trim: true, default:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' },
     banner      : { type: String, trim: true, default:'https://images.pexels.com/photos/7135037/pexels-photo-7135037.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2' },
 },{ timestamps: true });
 
-const Company:Model<any> = mongoose.models.Company  || model('Company', companySchema);
+const Company:Model<ICompany> = mongoose.models.Company  || model('Company', companySchema);
 
 export default Company;

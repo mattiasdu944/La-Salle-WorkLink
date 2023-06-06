@@ -1,6 +1,7 @@
 export const initialVacancies = {
     vacancies: [
         {
+            company : '647e23eac7ece1c7bc87c5e5',
             title           : 'Senior Frontend Developer',
             description     :'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam convallis ante purus, vitae rutrum diam ultrices vitae. Suspendisse scelerisque gravida convallis. Nulla non tellus leo. Donec sit amet pharetra elit. Maecenas tempus lectus vel elementum sollicitudin. Duis pharetra aliquam dictum. In id libero faucibus, placerat enim et, euismod elit. Suspendisse bibendum elementum velit ac tincidunt. Ut quam leo, volutpat eget efficitur sit amet, accumsan eu tortor. In ullamcorper blandit urna, id pretium erat venenatis sit amet. Donec ut orci vel justo blandit dignissim at eget sem. Nam nec ultricies magna, ut suscipit arcu. Integer accumsan, ligula sed efficitur consectetur, nibh enim viverra ex, sit amet ultrices erat metus non nunc.',
             requirements    : { 
@@ -19,6 +20,7 @@ export const initialVacancies = {
             image       : 'https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
         },
         {
+            company: '647e23eac7ece1c7bc87c5e7',
             title           : 'Jefe de ventas',
             description     :'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam convallis ante purus, vitae rutrum diam ultrices vitae. Suspendisse scelerisque gravida convallis. Nulla non tellus leo. Donec sit amet pharetra elit. Maecenas tempus lectus vel elementum sollicitudin. Duis pharetra aliquam dictum. In id libero faucibus, placerat enim et, euismod elit. Suspendisse bibendum elementum velit ac tincidunt. Ut quam leo, volutpat eget efficitur sit amet, accumsan eu tortor. In ullamcorper blandit urna, id pretium erat venenatis sit amet. Donec ut orci vel justo blandit dignissim at eget sem. Nam nec ultricies magna, ut suscipit arcu. Integer accumsan, ligula sed efficitur consectetur, nibh enim viverra ex, sit amet ultrices erat metus non nunc.',
             requirements    : { 
@@ -37,6 +39,7 @@ export const initialVacancies = {
             image       : 'https://images.pexels.com/photos/237436/pexels-photo-237436.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
         },
         {
+            company : '647e23eac7ece1c7bc87c5e6',
             title           : 'Pasante de Sistemas',
             description     : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam convallis ante purus, vitae rutrum diam ultrices vitae. Suspendisse scelerisque gravida convallis. Nulla non tellus leo. Donec sit amet pharetra elit. Maecenas tempus lectus vel elementum sollicitudin. Duis pharetra aliquam dictum. In id libero faucibus, placerat enim et, euismod elit. Suspendisse bibendum elementum velit ac tincidunt. Ut quam leo, volutpat eget efficitur sit amet, accumsan eu tortor. In ullamcorper blandit urna, id pretium erat venenatis sit amet. Donec ut orci vel justo blandit dignissim at eget sem. Nam nec ultricies magna, ut suscipit arcu. Integer accumsan, ligula sed efficitur consectetur, nibh enim viverra ex, sit amet ultrices erat metus non nunc.',
             requirements    : { 
@@ -55,6 +58,7 @@ export const initialVacancies = {
             image       : 'https://images.pexels.com/photos/39284/macbook-apple-imac-computer-39284.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
         },
         {
+            company:'647e23eac7ece1c7bc87c5e8',
             title           : 'Auxiliar administrativo',
             description     : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam convallis ante purus, vitae rutrum diam ultrices vitae. Suspendisse scelerisque gravida convallis. Nulla non tellus leo. Donec sit amet pharetra elit. Maecenas tempus lectus vel elementum sollicitudin. Duis pharetra aliquam dictum. In id libero faucibus, placerat enim et, euismod elit. Suspendisse bibendum elementum velit ac tincidunt. Ut quam leo, volutpat eget efficitur sit amet, accumsan eu tortor. In ullamcorper blandit urna, id pretium erat venenatis sit amet. Donec ut orci vel justo blandit dignissim at eget sem. Nam nec ultricies magna, ut suscipit arcu. Integer accumsan, ligula sed efficitur consectetur, nibh enim viverra ex, sit amet ultrices erat metus non nunc.',
             requirements    : { 

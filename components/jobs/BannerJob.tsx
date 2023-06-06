@@ -1,7 +1,13 @@
-import { Box, Button, Typography, Divider } from '@mui/material';
 import React, { FC } from 'react'
 
-export const BannerJob: FC = () => {
+import { Box, Button, Typography, Divider } from '@mui/material';
+import { IVacant } from '@/interfaces';
+
+interface Props{
+    vacant: IVacant;
+}
+
+export const BannerJob: FC<Props> = ({ vacant }) => {
     return (
         <Box
             sx={{
@@ -12,7 +18,7 @@ export const BannerJob: FC = () => {
                 position:'relative',    
                 borderRadius:'1rem',
                 minHeight: {xs:'13vh', md:'35vh'},
-                mb:10
+                mb:'10rem'
             }}
         >
             <Box
@@ -31,30 +37,30 @@ export const BannerJob: FC = () => {
                 }}
             >
                 <Box  display='flex' justifyContent='space-between' alignItems='center'>
-                    <Typography color='#000' variant='h3'>Ultima vacante publicada</Typography>
+                    <Typography color='#000' variant='h3'>{ vacant.title }</Typography>
                     <Button>Ver vacante</Button>
                 </Box>
                 <Divider sx={{ my:3 }}/>
                 <Box display='flex' justifyContent='space-between'>
                     <Box>
                         <Typography color='text.primary'>Location</Typography>
-                        <Typography variant='subtitle1'>Algun lugar</Typography>
+                        <Typography variant='subtitle1'>{ vacant.location }</Typography>
                     </Box>
                     <Box>
                         <Typography color='text.primary'>Publicado</Typography>
-                        <Typography variant='subtitle1'>12 de Enero</Typography>
+                        <Typography variant='subtitle1'>{ vacant.createdAt }</Typography>
                     </Box>
                     <Box>
                         <Typography color='text.primary'>Experience</Typography>
-                        <Typography variant='subtitle1'>Any</Typography>
+                        <Typography variant='subtitle1'>{ vacant.requirements.experience }</Typography>
                     </Box>
                     <Box>
                         <Typography color='text.primary'>Salario</Typography>
-                        <Typography variant='subtitle1'>3k a 5k</Typography>
+                        <Typography variant='subtitle1'>{ vacant.salary }</Typography>
                     </Box>
                     <Box>
                         <Typography color='text.primary'>Tipo</Typography>
-                        <Typography variant='subtitle1'>Remoto</Typography>
+                        <Typography variant='subtitle1'>{ vacant.type }</Typography>
                     </Box>
                 </Box>
             </Box>

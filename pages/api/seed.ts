@@ -17,11 +17,11 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
     // await User.deleteMany();
     // await User.insertMany( seedDatabase.initialData.users );
     
-    await Company.deleteMany();
-    await Company.insertMany( initialCompanies.companies );
+    // await Company.deleteMany();
+    // await Company.insertMany( initialCompanies.companies );
 
-    // await Vacant.deleteMany();
-    // await Vacant.insertMany( initialVacancies.vacancies );
+    await Vacant.deleteMany();
+    await Vacant.insertMany( initialVacancies.vacancies );
     await db.disconnect();
 
 
