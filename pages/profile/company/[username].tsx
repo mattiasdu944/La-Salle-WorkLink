@@ -3,7 +3,8 @@ import { dbUsers } from '@/database'
 import { ICompany } from '@/interfaces'
 
 import { MainLayout } from '@/layouts'
-import { CompanyBanner } from '@/components';
+import { AboutCardCompany, CompanyBanner, SocialNetworkCompany,  } from '@/components';
+import { Grid } from '@mui/material';
 
 
 interface Props{
@@ -22,13 +23,26 @@ const UserProfile: NextPage<Props> = ({ profile }) => {
             /> */}
 
             <CompanyBanner profile={ profile }/>
+            <Grid container spacing={ 3 }>
+                <Grid item xs={ 12 } lg={ 8 }>
+                    <AboutCardCompany
+                        description={ profile.description }
+                    />
+                </Grid>
+                <Grid item xs={ 12 } lg={ 4 }>
+                    <SocialNetworkCompany 
+                        email={ profile.email }
+                        phone={ profile.phone }
+                    />
+                </Grid>
+            </Grid>
+            {/* <AboutCard 
+                description={ profile.description } 
+                socialNetworks={ profile.socialNetworks }
+            /> */}
 
 
         {/* 
-            <AboutCard 
-                description={ profile.description } 
-                socialNetworks={ profile.socialNetworks }
-            />
 
 
             <Grid container spacing={5}>
