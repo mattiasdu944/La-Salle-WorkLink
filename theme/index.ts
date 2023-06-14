@@ -52,10 +52,11 @@ export const lightTheme = createTheme({
         MuiTypography: {
             styleOverrides: {
                 root:{
-                    lineHeight: 1.4
+                    lineHeight: 1.5
                 },
                 h1: {
                     fontSize: 35,
+                    marginBottom:'1rem',
                     fontWeight: 700,
                     '@media(min-width: 780px)' : {
                         fontSize: 40,
@@ -64,6 +65,7 @@ export const lightTheme = createTheme({
                 },
                 h2: {
                     fontSize: 30,
+                    marginBottom:'1rem',
                     fontWeight: 700,
                     '@media(min-width: 780px)' : {
                         fontSize: 36,
@@ -72,8 +74,8 @@ export const lightTheme = createTheme({
 
                 h3: {
                     fontSize: 25,
+                    marginBottom:'1rem',
                     fontWeight: 700,
-                    marginBottom:8,
                     '@media(min-width: 780px)' : {
                         fontSize: 30,
                     }

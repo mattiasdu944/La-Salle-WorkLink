@@ -26,7 +26,6 @@ export const BannerJob: FC<Props> = ({ vacant }) => {
                     backgroundColor:'rgba(255,255,255,0.55)',
                     borderRadius:'1rem',
                     maxWidth:{ xs:'70%', md:'80%' }, 
-                    backdropFilter:'blur(10px)',
                     margin:'0 auto',
                     position:'absolute',
                     bottom:{ xs:'-10rem', sm:'-7rem' },

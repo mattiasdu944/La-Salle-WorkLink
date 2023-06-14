@@ -1,3 +1,4 @@
+export * from './BannerDetailsJob'
 export * from './BannerJob'
 export * from './FormNewJob'
 export * from './JobCard'
