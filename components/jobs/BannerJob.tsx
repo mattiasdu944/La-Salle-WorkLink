@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 
 import { Box, Button, Typography, Divider } from '@mui/material';
 import { IVacant } from '@/interfaces';
+import { DateFormat } from '@/helpers/formats';
 
 interface Props{
     vacant: IVacant;
@@ -27,6 +28,7 @@ export const BannerJob: FC<Props> = ({ vacant }) => {
                     borderRadius:'1rem',
                     maxWidth:{ xs:'70%', md:'80%' }, 
                     margin:'0 auto',
+                    backdropFilter:'blur(10px)',
                     position:'absolute',
                     bottom:{ xs:'-10rem', sm:'-7rem' },
                     left:'0',
@@ -47,7 +49,7 @@ export const BannerJob: FC<Props> = ({ vacant }) => {
                     </Box>
                     <Box>
                         <Typography color='text.primary'>Publicado</Typography>
-                        <Typography variant='subtitle1'>{ vacant.createdAt }</Typography>
+                        <Typography variant='subtitle1'>{ DateFormat( vacant.createdAt! ) }</Typography>
                     </Box>
                     <Box>
                         <Typography color='text.primary'>Experience</Typography>

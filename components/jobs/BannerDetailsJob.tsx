@@ -1,54 +1,54 @@
 import React from 'react'
-import { Avatar, Box, Typography, Button } from '@mui/material';
+import { Avatar, Box, Typography, Button, Divider } from '@mui/material';
 import { FC } from 'react';
 import { Company, Requirements } from '@/interfaces';
+import { DateFormat } from '../../helpers/formats';
 
 interface Props{
-    company: Company;
-    requirements: Requirements;
-
+    company:    Company
     image:      string;
     createdAt:  string;
     title:      string;
-    type:       string;
-    workingHour:string;
-    location    :string;
-    salary:     number;
-
+    location:   string;
 }
 
-export const BannerDetailsJob: FC<Props> = ({ company, createdAt, image, requirements, title, type, salary, workingHour, location }) => {
+export const BannerDetailsJob: FC<Props> = ({ company, createdAt, image, title, location }) => {
     return (
-        <Box
-            sx={{
-                backgroundImage:`url(${ image })`,
-                backgroundPosition:'center bottom',
-                backgroundSize:'cover',
-                backgroundColor:'rgba(0,0,0,0.5)',
-                backgroundBlendMode:'color',
-                backdropFilter:'blur(10px)',
-                padding:{ xs:'3rem', md:'3rem 8rem' },
-                position:'relative',    
-                borderRadius:'1rem',
-                minHeight: {xs:'13vh', md:'35vh'},
-                mb:'2rem',
-                color:'#fff'
-            }}
-        >
-            <Box sx={{ display:'flex', alignItems:'center', gap:2, mb:3 }}>
-                <Avatar src={ company?.image } />
-                <Box>
-                    <Typography>{ company!.name }</Typography>
-                    <Typography>{ createdAt }</Typography>
-                </Box>
+        <>
+            <Box
+                sx={{
+                    backgroundImage:`url(${ image })`,
+                    backgroundPosition:'center',
+                    backgroundSize:'cover',
+                    position:'relative',    
+                    minHeight:'20rem',
+                    borderRadius:'1rem',
+                    mb:'2rem',
+                    color:'#fff',
+                    marginBottom:'5rem'
+                }}
+            >   
+                <Avatar 
+                    sx={{
+                        width:150,
+                        height:150,
+                        position:'absolute',
+                        bottom:'-3rem',
+                        left:'3rem'
+                    }}
+                    src={ company?.image }
+                />
             </Box>
-            <Typography variant='h1'>{ title }</Typography>
-            <Typography>
-                { type } | { requirements.experience } | { workingHour } | { location }
-            </Typography>
-            <Typography>Sueldo Bruto: { salary }bs</Typography>
-            <Button sx={{ mt:3 }}>Postular</Button>
-            
-        </Box>
+            <Box sx={{ display:'flex', alignItems:'center', mb:3, justifyContent:'space-between' }}>
+                    <Box>
+                        <Typography variant='h2' mb={0}>{ title }</Typography>
+                        <Typography fontWeight={600} fontSize='1.15rem' mb='.5rem'>{ company.name }</Typography>
+                        <Typography>{ location } - { DateFormat(createdAt) }</Typography>
+                    </Box>
+                    <Button sx={{ minWidth:'9rem' }}>Aplicar</Button>
+            </Box>
+            <Divider sx={{ mb:'1rem' }}/>
+        </>
+
     )
 }
