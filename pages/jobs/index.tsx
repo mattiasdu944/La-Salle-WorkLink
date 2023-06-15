@@ -4,7 +4,7 @@ import { ICompany, IVacant } from '@/interfaces'
 import { dbCompanies, dbJobs } from '@/database'
 
 import { MainLayout } from '@/layouts'
-import { BannerJob, JobsList, ContactsWidget } from '@/components'
+import { BannerJob, JobsList, CompaniesWidget } from '@/components'
 import { Grid, Typography } from '@mui/material';
 
 interface Props{
@@ -34,7 +34,7 @@ const JobsPage: NextPage<Props> = ({ vacants, companies }) => {
                         top:'1rem'
                     }}   
                 >
-                    <ContactsWidget companies={ companies }/>
+                    <CompaniesWidget companies={ companies }/>
                 </Grid>
             
             </Grid>

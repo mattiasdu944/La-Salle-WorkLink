@@ -1,14 +1,20 @@
 import { NextPage } from 'next';
-
-import { AuthContext } from '../context/auth/AuthContext';
-import { useContext } from 'react';
+import { GetServerSideProps } from 'next'
 import { MainLayout } from '@/layouts';
-import { Box, Grid } from '@mui/material';
-import { JobPost, NewJobWidgets } from '@/components';
+import { ICompany, IUser, IVacant } from '@/interfaces';
+import { dbCompanies, dbJobs, dbUsers } from '@/database';
 
-const HomePage:NextPage = () => {
+import { JobPost, CompaniesWidget, ContactsWidget } from '@/components';
+import { Box, Grid, Typography } from '@mui/material';
 
-    const { user, isLoggedIn } = useContext(AuthContext);
+interface Props{
+    vacants: IVacant[];
+    companies: ICompany[];
+    users: IUser[];
+}
+
+const HomePage:NextPage<Props> = ({ vacants, companies, users }) => {
+
 
 
     return (
@@ -18,9 +24,10 @@ const HomePage:NextPage = () => {
         >
             <Grid container sx={{ position:'relative' }} spacing={3}>
                 <Grid item xs={ 12 } md={ 8 }>
+                    <Typography variant='h2'>Encuentra nuevas oportunidades</Typography>
                     {
-                        [0,1,2,3,4].map(() => 
-                            <JobPost/>
+                        vacants.map(( vacant ) => 
+                            <JobPost vacant={ vacant }/>
                         )
                     }
                 </Grid>
@@ -29,17 +36,37 @@ const HomePage:NextPage = () => {
                     item 
                     xs={ 12 } 
                     md={ 4 }
-                    sx={{
-                        position:'sticky',
-                        top:'1rem'
-                    }}    
-                >
-                    <NewJobWidgets/>
+                >  
+                    <Box 
+                        sx={{
+                            position:'sticky',
+                            top:'5rem',
+                            display:'grid',
+                            gap:'1rem'
+                        }}
+                    >
+                        <CompaniesWidget companies={companies}/>
+                        <ContactsWidget users={ users }/>
+                    </Box>
                 </Grid>
             </Grid>
 
         </MainLayout>
     )
+}
+
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    const vacants = await dbJobs.getLastJobs();
+    const companies = await dbCompanies.getAllCompanies(); 
+    const users = await dbUsers.getAllUsers();
+    return {
+        props: {
+            vacants,
+            companies,
+            users
+        }
+    }
 }
 
 export default HomePage;

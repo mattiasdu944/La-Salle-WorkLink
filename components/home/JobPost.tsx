@@ -3,8 +3,13 @@ import { FC } from 'react';
 import { Avatar, Box, Typography } from '@mui/material';
 import { GoCommentDiscussion } from 'react-icons/go';
 import { AiOutlineHeart, AiOutlineShareAlt } from 'react-icons/ai';
+import { IVacant } from '@/interfaces';
 
-export const JobPost:FC = () => {
+interface Props{
+    vacant: IVacant
+}
+
+export const JobPost:FC<Props> = ({ vacant }) => {
     return (
         <Box
             sx={{
@@ -19,27 +24,37 @@ export const JobPost:FC = () => {
                     display:'flex',
                     alignItems:'center',
                     gap:'1rem',
-                    mb:3 
+                    mb:2
                 }}
             >
-                <Avatar alt="Remy Sharp" src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" />
+                <Avatar alt={ vacant.company!.name } src={ vacant.company!.image } />
                 <Box>
                     <Typography variant='subtitle1' mb={ 0 }>
-                        Nombre del usuario
+                        { vacant.title }
                     </Typography>
-                    <Typography>Carrera de usuario</Typography>
+                    <Typography>{ vacant.company!.username }</Typography>
                 </Box>
 
             </Box>
             <Box>
-                <Typography mb={ 2 }>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt doloribus fuga, facere veritatis nesciunt, iste provident sed iusto eaque nulla, eum quasi! Dolore, neque. Eos, soluta! Aspernatur vero autem non?
+                <Typography 
+                    sx={{
+                        textAlign:'justify',
+                        display: '-webkit-box',
+                        WebkitLineClamp:3,
+                        '-webkit-box-orient': 'vertical',
+                        overflow:'hidden',
+                        textOverflow:'ellipsis',
+                        mb:3
+                    }}
+                >
+                    { vacant.description }
                 </Typography>
                 <Box
                     component='img'
                     width='100%'
                     sx={{ borderRadius:'1rem' }}
-                    src='https://images.pexels.com/photos/5711267/pexels-photo-5711267.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+                    src={ vacant.image }
                 />
             </Box>
             <Box

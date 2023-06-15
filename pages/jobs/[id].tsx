@@ -3,9 +3,8 @@ import { dbJobs } from '@/database';
 import { IVacant } from '@/interfaces';
 
 import { MainLayout } from '@/layouts';
-import { BannerDetailsJob, MoreInfoJobWidget } from '@/components';
-import { Box, Chip, Grid, Stack, Typography } from '@mui/material';
-import { AboutJobWidget } from '../../components/jobs/AboutJobWidget';
+import { BannerDetailsJob, MoreInfoJobWidget, AboutJobWidget } from '@/components';
+import { Grid } from '@mui/material';
 
 interface Props{
     vacant: IVacant;
